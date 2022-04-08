@@ -11,7 +11,7 @@ dloc number;
 same_name exception;
 too_long exception;
 invalid_location exception;
-same_name_but_location_updated exception;
+same_name_but_location_update exception;
 other exception;
 
 BEGIN
@@ -27,7 +27,7 @@ if UPPER(i_dloc) IN ('MA', 'TX', 'IL', 'CA', 'NY', 'NJ', 'NH', 'RH') then
 UPDATE department
 SET dept_location = i_dloc
 WHERE dept_name = i_dname;
-raise same_name_but_location_updated;
+raise same_name_but_location_update;
 else
 raise invalid_location;
 end if;
@@ -49,7 +49,7 @@ when invalid_location then
 dbms_output.put_line ('ERROR: You have entered' || i_dloc || ' a location that is not in the following accepted location -->  MA, TX, IL, CA, NY, NJ, NH, RH');
 when too_long then
 dbms_output.put_line ('ERROR: length of department name is more than 20');
-when same_name_but_location_updated then
+when same_name_but_location_update then
 dbms_output.put_line ('ERROR: You have entered' || i_dname || ' a department that already exsists but LOCATION UPDATED TO ' || i_dloc);
 when other then
 dbms_output.put_line ('ERROR: OTHER');
