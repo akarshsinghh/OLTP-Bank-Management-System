@@ -14,12 +14,14 @@ Zipcode int CONSTRAINT Zip_Length CHECK (LENGTH(Zipcode)=5),
 Phone int CONSTRAINT Phone_Length CHECK(LENGTH(Phone)=10)
 );
 
-DROP TABLE WORKS_WITH;
+-- Changes Made, Primary Key Not Added
 CREATE TABLE WORKS_WITH(
 Customer_ID INT NOT NULL,
 Employee_ID INT NOT NULL,
-Relationship varchar(20)
+Relationship varchar(20),
+PRIMARY KEY (Customer_ID,Employee_ID)
 );
+
 
 
 
