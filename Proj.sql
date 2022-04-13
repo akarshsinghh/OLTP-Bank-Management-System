@@ -23,45 +23,45 @@ PRIMARY KEY (Customer_ID,Employee_ID)
 );
 
 
-INSERT INTO Customer values('100','Kiran','Kumar','12-05-1988','NE','M','14','Onestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('100','Kiran','Kumar','12-05-1988','NE','M','14','Onestreet', 'Boston', 'MA', '12345', '9999999999');
 
-INSERT INTO Customer values('101','Rahul','Mehta','11-04-1990','NE','M','14','Twostreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('101','Rahul','Mehta','11-04-1990','NE','M','14','Twostreet', 'Boston', 'MA', '12345', '9658365933');
 
-INSERT INTO Customer values('102','Nandan', 'Mohan','11-04-1990','NE','M','15','Threestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('102','Nandan', 'Mohan','11-04-1990','NE','M','15','Threestreet', 'Boston', 'MA', '12345', '8572212077');
 
-INSERT INTO Customer values('103','Lakshana','Kolur','07-11-1985','SE','F','05','Fourstreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('103','Lakshana','Kolur','07-11-1985','SE','F','05','Fourstreet', 'Boston', 'MA', '12345', '7575838485');
 
-INSERT INTO Customer values('104','Mohan','Kumar','21-07-1981','SE','F','03','Fivestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('104','Mohan','Kumar','21-07-1981','SE','F','03','Fivestreet', 'Boston', 'MA', '12345', '7863542435');
 
-INSERT INTO Customer values('105','Meghana','Singh','01-11-1972','NE','M','14','Onestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('105','Meghana','Singh','01-11-1972','NE','M','14','Onestreet', 'Boston', 'MA', '12345', '8755235554');
 
-INSERT INTO Customer values('106','Rajdeep','Mamtani','12-03-1979','SE','M','14','Twostreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('106','Rajdeep','Mamtani','12-03-1979','SE','M','14','Twostreet', 'Allston', 'MA', '12345', '7843563450');
 
-INSERT INTO Customer values('107','Sonal','Singh','18-01-1988','SE','F','23','Threestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('107','Sonal','Singh','18-01-1988','SE','F','23','Threestreet', 'Allston', 'MA', '12345', '8954398443');
 
-INSERT INTO Customer values('108','Jayashree','Kumari','14-06-1984','SE','M','14','Fourstreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('108','Jayashree','Kumari','14-06-1984','SE','M','14','Fourstreet', 'Allston', 'MA', '12345', '9787837854');
 
-INSERT INTO Customer values('109','Abhilasha','Somani','06-06-1966','SE','F','11','Fivestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('109','Abhilasha','Somani','06-06-1966','SE','F','11','Fivestreet', 'Cambridge', 'MA', '12345', '9827354354');
 
-INSERT INTO Customer values('109','Anukriti','Joshi','19-09-1981','NE','M','14','Onestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('109','Anukriti','Joshi','19-09-1981','NE','M','14','Onestreet', 'Cambridge', 'MA', '12345', '8754290454');
 
-INSERT INTO Customer values('110','Amol', 'Srivatsav','09-05-1987','SE','M','08','Twostreet', 'Mangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('110','Amol', 'Srivatsav','09-05-1987','SE','M','08','Twostreet', 'Cambridge', 'MA', '12345', '9873455445');
 
-INSERT INTO Customer values('111','Abhimanyu','Sarda','12-05-1990','NE','M','14','Threestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('111','Abhimanyu','Sarda','12-05-1990','NE','M','14','Threestreet', 'Cambridge', 'MA', '12345', '8754493433');
 
-INSERT INTO Customer values('112','Nayanika', 'Hazarika','11-05-1987','NE','M','14','Fourstreet', 'Bangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('112','Nayanika', 'Hazarika','11-05-1987','NE','M','14','Fourstreet', 'Cambridge', 'MA', '12345', '9865489380');
 
-INSERT INTO Customer values('113', 'Ritrisha' ,'Baruah','12-05-1988','SE','M','14','Fivestreet', 'Bangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('113', 'Ritrisha' ,'Baruah','12-05-1988','SE','M','14','Fivestreet', 'Boston', 'MA', '12345', '7893548993');
 
-INSERT INTO Customer values('114','Amol', 'Prakash','12-05-1988','SE','F','14','Onestreet', 'Bangalore', 'KA', '12345', '9999999999');
+INSERT INTO Customer values('114','Amol', 'Prakash','12-05-1988','SE','F','14','Onestreet', 'Boston', 'KA', '12345', '8889876543');
 
-INSERT INTO Customer values('115','Kiran', 'Kumar','12-05-1988','NE','M','14','Twostreet', 'Mangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('115','Kiran', 'Kumar','12-05-1988','NE','M','14','Twostreet', 'Amherst', 'MA', '12345', '7878676887');
 
-INSERT INTO Customer values('116','Mrinal', 'Kumar','08-08-1991','NE','M','14','Threestreet', 'Mangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('116','Mrinal', 'Kumar','08-08-1991','NE','M','14','Threestreet', 'Amherst', 'MA', '12345', '7665687670');
 
-INSERT INTO Customer values('117','Najuk', 'Pincha','12-05-1988','SE','F','21','Fourstreet', 'Mangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('117','Najuk', 'Pincha','12-05-1988','SE','F','21','Fourstreet', 'Amherst', 'MA', '12345', '8765432109');
 
-INSERT INTO Customer values('118','Sowmya', 'Raghavan','12-05-1988','NE','M','14','Fivestreet', 'Bangalore', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('118','Sowmya', 'Raghavan','12-05-1988','NE','M','14','Fivestreet', 'Amherst', 'MA', '12345', '8765409876');
 
 SELECT * FROM CUSTOMER;
 
