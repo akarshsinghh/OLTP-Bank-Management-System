@@ -1,5 +1,5 @@
 SET SERVEROUTPUT ON;
--- Drop All Constraints
+
 declare
     constr all_constraints.constraint_name%TYPE;
 begin
@@ -13,7 +13,7 @@ begin
 end;
 /
 
--- Drop All Tables From Child to Parent
+
 begin 
 for rec in (
            select table_name from user_tables 
@@ -102,21 +102,21 @@ Branch_ID NUMBER
 
 CREATE TABLE EMPLOYEE 
    (
-    EMPLOYEE_ID NUMBER(10,0) NOT NULL, 
+    EMPLOYEE_ID NUMBER NOT NULL, 
 	BRANCH_ID NUMBER(10,0) NOT NULL, 
 	DEPARTMENT VARCHAR2(20 BYTE) NOT NULL, 
 	FIRST_NAME VARCHAR2(20 BYTE) NOT NULL, 
 	LAST_NAME VARCHAR2(20 BYTE), 
-	SEX VARCHAR2(1 BYTE), 
+	SEX CHAR(1), 
 	DOB DATE, 
 	SALARY NUMBER(10,2), 
 	EMP_ROLE VARCHAR2(20 BYTE), 
-	EMAIL_ID VARCHAR2(20 BYTE) NOT NULL, 
-	CONTACT_NO NUMBER(10,0), 
-	SUPERVISOR_ID NUMBER(10,0), 
+	EMAIL_ID VARCHAR2(40 BYTE), 
+	CONTACT_NO NUMBER(10,0) NOT NULL, 
+	SUPERVISOR_ID NUMBER, 
 	 CONSTRAINT "EMP_EMPLOYEE_ID" CHECK ( Employee_Id > 0 ), 
 	 CONSTRAINT "EMP_BRANCH_ID" CHECK (Branch_Id > 0 ), 
-	 CONSTRAINT "GENDER_CHECK" CHECK (Sex IN ('F','M','Other')), 
+	 CONSTRAINT "GENDER_CHECK" CHECK (Sex IN ('F','M','O')), 
 	 CONSTRAINT "SAL_CHECK" CHECK (Salary > 0 ), 
 	 CONSTRAINT "CONTACT_CHECK" CHECK ( LENGTH(CONTACT_NO) = 10 ), 
 	 PRIMARY KEY ("EMPLOYEE_ID")
@@ -171,7 +171,7 @@ Category varchar (20) NOT NULL
 );
 
 CREATE TABLE Branch (
-BranchIFSC Char(11) PRIMARY KEY ,
+BranchIFSC Char(11) PRIMARY KEY CONSTRAINT elevenchar CHECK (length(BranchIFSC)=11),
 Branch_ID   int UNIQUE,
 Address  VARCHAR(20) NOT NULL,
 Street  VARCHAR(20)NOT NULL,
@@ -211,12 +211,11 @@ ALTER TABLE Loan ADD CONSTRAINT FK_Sanction_ID FOREIGN KEY (Approved_By_ID) REFE
 ALTER TABLE Loan_Transactions ADD CONSTRAINT FK_LIFSC FOREIGN KEY (LoanIFSC) REFERENCES Branch(BranchIFSC)ON DELETE CASCADE;
 ALTER TABLE Loan_Transactions ADD CONSTRAINT FK_LoanAccNumber FOREIGN KEY (LoanAccNumber) REFERENCES Loan(LoanAccNumber)ON DELETE CASCADE;
 
-
 -- Loan Interest
 ALTER TABLE Loan_Interest ADD CONSTRAINT FK_Interest_LoanAccNumber FOREIGN KEY (LoanAccNumber) REFERENCES Loan(LoanAccNumber)ON DELETE CASCADE;
 ALTER TABLE Loan_Interest ADD CONSTRAINT FK_Loan_Interest_IFSC FOREIGN KEY (BranchIFSC) REFERENCES Branch(BranchIFSC)ON DELETE CASCADE;
 ALTER TABLE Loan_Interest ADD CONSTRAINT FK_Loan_Interst_Loan_Type FOREIGN KEY (Loan_Type) REFERENCES Loan_Type(Loan_Type) ON DELETE CASCADE;
-
+--
 -- Loan_Type (NO FK) 
 
 -- Works With
@@ -227,6 +226,24 @@ ALTER TABLE Works_With ADD CONSTRAINT FK_Works_With_Customer FOREIGN KEY (Custom
 ALTER TABLE Employee ADD CONSTRAINT FK_Emp_Branch FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID) ON DELETE CASCADE;
 
 -- Customer (NO FK)
+
+
+-- Data Inserting Branch
+INSERT INTO BRANCH VALUES ('DMDD0454500',1,'405 Huntington Ave','Park Street','Boston','MA',02120,012324);
+INSERT INTO BRANCH VALUES ('DMDD0101022',2,'111 Howard Ave','Tremont Street','Boston','MA',02180,055564);
+INSERT INTO BRANCH VALUES ('DMDD0333100',3,'333 Longwood Ave','Milk Street','Boston','MA',02190,037567);
+
+-- Data Inserting Employee
+INSERT INTO EMPLOYEE VALUES (012324, 1, 'Research', 'Akarsh', 'Singh', 'M',TO_DATE('1999-03-09','YYYY-MM-DD'), 120000, 'Branch Manager', 'akarshsinghh@gmail.com', 7710037766, '');
+INSERT INTO EMPLOYEE VALUES (055564, 2, 'Sales', 'Alex', 'ONeil', 'M',TO_DATE('1997-10-06','YYYY-MM-DD'), 115000, 'Branch Manager', 'neilalex32@gmail.com', 8910037766, '');
+INSERT INTO EMPLOYEE VALUES (037567, 3, 'Sales', 'Kylie', 'James', 'F',TO_DATE('1992-11-01','YYYY-MM-DD'), 130000, 'Branch Manager', 'thekyliejames@outlook.com', 8910032459, '');
+INSERT INTO EMPLOYEE VALUES (036940, 3, 'Sales', 'Megan', 'Smith', 'F',TO_DATE('1999-06-30','YYYY-MM-DD'), 67000, 'Accountant', 'megans30@outlook.com', 8910076403, 012324);
+-- 
+
+
+
+
+
 
 
 
