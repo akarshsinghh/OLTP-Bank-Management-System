@@ -2,7 +2,7 @@ CREATE TABLE Account(
 AccountNumber NUMBER NOT NULL,
 Account_Type VARCHAR(20) NOT NULL,
 BranchIFSC CHAR(11) NOT NULL,
-Customer_ID INT,
+Customer_ID INT NOT NUll,
 Account_Balance DECIMAL NOT NULL CONSTRAINT Balance_Positive CHECK (Account_Balance > 0),
 PRIMARY KEY (AccountNumber)
 );
