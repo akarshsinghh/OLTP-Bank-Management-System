@@ -1,5 +1,5 @@
 SET SERVEROUTPUT ON;
-
+-- Drop All Constraints
 declare
     constr all_constraints.constraint_name%TYPE;
 begin
@@ -13,7 +13,7 @@ begin
 end;
 /
 
-
+-- Drop All Tables From Child to Parent
 begin 
 for rec in (
            select table_name from user_tables 
