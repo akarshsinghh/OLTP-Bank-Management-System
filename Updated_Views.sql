@@ -49,4 +49,29 @@ CREATE or REPLACE VIEW branch_loan_count AS
     
     Select * from Zip_Cust_Loan;
     
+     view for customer _account _status
+    
+      CREATE or REPLACE VIEW cust_account_stat AS
+  select c.Customer_ID, c.First_Name ,c.Last_Name ,a.AccountNumber, A.Status
+  from Customer c
+  inner join Account a
+  on c.Customer_ID = a.AccountNumber
+  inner join Account_Status A
+  on a.AccountNumber = A.Account_Number ;
+  
+  
+  select * from cust_account_stat;
+  
+  
+  view to check account status with just account number 
+  
+  CREATE or REPLACE VIEW account_stat AS
+  select a.AccountNumber,Status
+  from Account_Status A
+  inner join Account a
+  on A.Account_Number = a.AccountNumber ;
+  
+  select * from account_stat ;
+  
+    
     
