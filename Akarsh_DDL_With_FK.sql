@@ -257,28 +257,68 @@ INSERT INTO EMPLOYEE VALUES (019999, 1, 'Operations', 'Nick', 'Bilzerian','M',TO
 
 -- Customer
 
-INSERT INTO Customer values('100000','John','Sander','12-05-1988','NE','M','14','Calumet St', 'Boston', 'MA', '12345', '9999999999');
-INSERT INTO Customer values('100001','Adam','Levine','11-04-1990','NE','M','14','Milk Street', 'Boston', 'MA', '12345', '9658365933');
-INSERT INTO Customer values('100002','Josh', 'Curry','11-04-1990','NE','M','15','Park Street', 'Boston', 'MA', '12345', '8572212077');
-INSERT INTO Customer values('100003','Lakshana','Kolur','07-11-1985','SE','F','05','South End Street', 'Boston', 'MA', '12345', '7575838485');
-INSERT INTO Customer values('100004','Clara','Goerge','21-07-1981','SE','F','03','Hill Road', 'Boston', 'MA', '12345', '7863542435');
-INSERT INTO Customer values('100005','Meghan','Ritter','01-11-1972','NE','F','14','Carter Street', 'Boston', 'MA', '12345', '8755235554');
-INSERT INTO Customer values('100006','Rajdeep','Mamtani','12-03-1979','SE','M','14','Mac Street', 'Allston', 'MA', '12345', '7843563450');
-INSERT INTO Customer values('100007','Sonal','Singh','18-01-1988','SE','F','23','Shipman Street', 'Allston', 'MA', '12345', '8954398443');
-INSERT INTO Customer values('100008','Jayashree','Kumari','14-06-1984','SE','F','14','India Street', 'Allston', 'MA', '12345', '9787837854');
-INSERT INTO Customer values('100009','Harper','Selter','06-06-1966','SE','F','11','Mass Ave', 'Cambridge', 'MA', '12345', '9827354354');
-INSERT INTO Customer values('100010','Amol', 'Srivatsav','09-05-1987','SE','O','08','Dennis Ave', 'Cambridge', 'MA', '12345', '9873455445');
-INSERT INTO Customer values('100011','Abhimanyu','Sarda','12-05-1990','NE','O','14','Huntington Ave', 'Cambridge', 'MA', '12345', '8754493433');
-INSERT INTO Customer values('100012','Amy', 'Hazarika','11-05-1987','NE','F','14','7th Ave', 'Cambridge', 'MA', '12345', '9865489380');
-INSERT INTO Customer values('100013', 'Tracy' ,'Zelensky','12-05-1988','SE','F','14','Light Road', 'Boston', 'MA', '12345', '7893548993');
-INSERT INTO Customer values('100014','Sharron', 'Naim','12-05-1988','SE','F','14','Sea Street', 'Boston', 'MA', '12345', '8889876543');
-INSERT INTO Customer values('100015','Charlie', 'Watson','12-05-1988','NE','F','14','13th Street', 'Amherst', 'MA', '12345', '7878676887');
-INSERT INTO Customer values('100016','Mrinal', 'Kumar','08-08-1991','NE','M','14','Curry Road', 'Amherst', 'MA', '12345', '7665687670');
-INSERT INTO Customer values('100017','Margot', 'Pincha','12-05-1988','SE','F','21','Belmont St', 'Amherst', 'MA', '12345', '8765432109');
-INSERT INTO Customer values('100018','Sowmya', 'Raghavan','12-05-1988','NE','M','14','Oak Road', 'Amherst', 'MA', '12345', '8765409876');
-INSERT INTO Customer values('100019','Anukriti','Joshi','19-09-1981','NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100000,'John','Sander',TO_DATE('1998-05-19','YYYY-MM-DD'),'NE','M','14','Calumet St', 'Boston', 'MA', '12345', '9999999999');
+INSERT INTO Customer values(100001,'Adam','Levine',TO_DATE('1990-04-18','YYYY-MM-DD'),'NE','M','14','Milk Street', 'Boston', 'MA', '12345', '9658365933');
+INSERT INTO Customer values(100002,'Josh', 'Curry',TO_DATE('1990-03-13','YYYY-MM-DD'),'NE','M','15','Park Street', 'Boston', 'MA', '12345', '8572212077');
+INSERT INTO Customer values(100003,'Lakshana','Kolur',TO_DATE('1997-02-14','YYYY-MM-DD'),'SE','F','05','South End Street', 'Boston', 'MA', '12345', '7575838485');
+INSERT INTO Customer values(100004,'Clara','Goerge',TO_DATE('1972-03-19','YYYY-MM-DD'),'SE','F','03','Hill Road', 'Boston', 'MA', '12345', '7863542435');
+INSERT INTO Customer values(100005,'Meghan','Ritter',TO_DATE('1973-06-16','YYYY-MM-DD'),'NE','F','14','Carter Street', 'Boston', 'MA', '12345', '8755235554');
+INSERT INTO Customer values(100006,'Rajdeep','Mamtani',TO_DATE('1979-03-12','YYYY-MM-DD'),'SE','M','14','Mac Street', 'Allston', 'MA', '12345', '7843563450');
+INSERT INTO Customer values(100007,'Sonal','Singh',TO_DATE('1988-01-18','YYYY-MM-DD'),'SE','F','23','Shipman Street', 'Allston', 'MA', '12345', '8954398443');
+INSERT INTO Customer values(100008,'Jayashree','Kumari',TO_DATE('1984-06-14','YYYY-MM-DD'),'SE','F','14','India Street', 'Allston', 'MA', '12345', '9787837854');
+INSERT INTO Customer values(100009,'Harper','Selter',TO_DATE('1966-06-06','YYYY-MM-DD'),'SE','F','11','Mass Ave', 'Cambridge', 'MA', '12345', '9827354354');
+INSERT INTO Customer values(100010,'Amol', 'Srivatsav',TO_DATE('1987-05-09','YYYY-MM-DD'),'SE','O','08','Dennis Ave', 'Cambridge', 'MA', '12345', '9873455445');
+INSERT INTO Customer values(100021,'Abhimanyu','Sarda',TO_DATE('1990-05-12','YYYY-MM-DD'),'NE','O','14','Huntington Ave', 'Cambridge', 'MA', '12345', '8754493433');
+INSERT INTO Customer values(100012,'Amy', 'Hazarika',TO_DATE('1987-05-11','YYYY-MM-DD'),'NE','F','14','7th Ave', 'Cambridge', 'MA', '12345', '9865489380');
+INSERT INTO Customer values(100013, 'Tracy' ,'Zelensky',TO_DATE('1988-05-12','YYYY-MM-DD'),'SE','F','14','Light Road', 'Boston', 'MA', '12345', '7893548993');
+INSERT INTO Customer values(100014,'Sharron', 'Naim',TO_DATE('1988-07-13','YYYY-MM-DD'),'SE','F','14','Sea Street', 'Boston', 'MA', '12345', '8889876543');
+INSERT INTO Customer values(100015,'Charlie', 'Watson',TO_DATE('1990-02-10','YYYY-MM-DD'),'NE','F','14','13th Street', 'Amherst', 'MA', '12345', '7878676887');
+INSERT INTO Customer values(100016,'Mrinal', 'Kumar',TO_DATE('1991-08-08','YYYY-MM-DD'),'NE','M','14','Curry Road', 'Amherst', 'MA', '12345', '7665687670');
+INSERT INTO Customer values(100017,'Margot', 'Pincha',TO_DATE('1996-03-13','YYYY-MM-DD'),'SE','F','21','Belmont St', 'Amherst', 'MA', '12345', '8765432109');
+INSERT INTO Customer values(100019,'Sowmya', 'Raghavan',TO_DATE('1994-04-19','YYYY-MM-DD'),'NE','M','14','Oak Road', 'Amherst', 'MA', '12345', '8765409876');
+INSERT INTO Customer values(100020,'Anukriti','Joshi',TO_DATE('1989-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
 
+--Account 
 
+INSERT INTO Account VALUES (3719713158835300, 'Savings', 'DMDD0454500', 100019, 1500);
+INSERT INTO Account VALUES (71086643758945400, 'Savings', 'DMDD0101022',100020, 2000);
+INSERT INTO Account VALUES (3690859741294280, 'Savings', 'DMDD0454500', 100001, 8056);
+INSERT INTO Account VALUES (37530666568966100, 'Savings', 'DMDD0333100', 100002, 3098);
+INSERT INTO Account VALUES (70048841700216300, 'Savings', 'DMDD0454500', 100003, 5000);
+INSERT INTO Account VALUES (89135767380499400, 'Savings', 'DMDD0101022', 100004, 2500);
+INSERT INTO Account VALUES (12494980148173100, 'Checking', 'DMDD0333100', 100005, 3500);
+INSERT INTO Account VALUES (8744336085399580, 'Checking', 'DMDD0101022', 100006, 1890);
+INSERT INTO Account VALUES (64289489845768000, 'Checking', 'DMDD0454500', 100007, 1051);
+INSERT INTO Account VALUES (70149340835549500, 'Checking', 'DMDD0333100', 100008, 1053);
+INSERT INTO Account VALUES (3719713158835400, 'Savings', 'DMDD0454500', 100009, 1500);
+
+--Account Interest
+
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (3719713158835300, 'DMDD0454500', '01-JAN-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (71086643758945400, 'DMDD0101022', '01-FEB-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (3690859741294280, 'DMDD0454500', '01-MAR-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (37530666568966100, 'DMDD0333100', '01-APR-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (70048841700216300, 'DMDD0454500', '01-MAY-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (89135767380499400, 'DMDD0101022', '01-JUN-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (12494980148173100, 'DMDD0333100', '01-JUL-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (8744336085399580, 'DMDD0101022', '01-AUG-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (64289489845768000, 'DMDD0454500', '01-SEP-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (70149340835549500, 'DMDD0333100', '01-OCT-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (3719713158835400, 'DMDD0454500', '01-JAN-21');
+
+--Account Status
+
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (3719713158835300, 'Active', '05-JAN-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (71086643758945400, 'Active', '09-FEB-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (3690859741294280, 'Active', '08-MAR-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (37530666568966100, 'Active', '07-APR-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (70048841700216300, 'Active', '06-MAY-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (89135767380499400, 'Active', '05-JUN-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (12494980148173100, 'Active', '04-JUL-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (8744336085399580, 'Active', '03-AUG-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (64289489845768000, 'Active', '02-SEP-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (70149340835549500, 'Active', '21-OCT-21');
+INSERT INTO Account_Status(account_number, status, created_date) VALUES (3719713158835400, 'InActive', '27-NOV-21');
 
 
 
