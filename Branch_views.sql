@@ -25,12 +25,12 @@ Supplier_Type  VARCHAR(20),
 Branch_ID NUMBER,
 CONSTRAINT FK_Branch_ID FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID));
 
-INSERT INTO Branch_Supplier VALUES (01,'Akshit','Security',1);
-INSERT INTO Branch_Supplier VALUES (02,'Aditya','Envelops',2);
-INSERT INTO Branch_Supplier VALUES (03,'Akarsh','Fabric Bag',3);
-INSERT INTO Branch_Supplier VALUES (01,'Sharath','Hardware',4);
-INSERT INTO Branch_Supplier VALUES (02,'Rucha','Stationary',5);
-INSERT INTO Branch_Supplier VALUES (03,'Siddharth',' ',6);
+INSERT INTO Branch_Supplier VALUES (01,'Secure Tech','Security',1);
+INSERT INTO Branch_Supplier VALUES (02,'Paper and Co','Envelops',2);
+INSERT INTO Branch_Supplier VALUES (03,'Baggit','Fabric Bag',3);
+INSERT INTO Branch_Supplier VALUES (01,'Electroplast','Hardware',4);
+INSERT INTO Branch_Supplier VALUES (02,'HomeDepot','Stationary',5);
+INSERT INTO Branch_Supplier VALUES (03,'BestBuy',' ',6);
 
 Select * from branch;
 
