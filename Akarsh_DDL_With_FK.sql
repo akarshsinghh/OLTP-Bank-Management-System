@@ -145,13 +145,13 @@ First_Name VARCHAR(20) NOT NULL,
 Last_Name VARCHAR(20) NOT NULL,
 DOB Date,
 Works_at VARCHAR(20),
-Sex VARCHAR(1) CONSTRAINT Genders CHECK(Sex IN ('M','F')),
-Apt_No VARCHAR(10),
-Street VARCHAR(10),
-City VARCHAR(10),
+Sex VARCHAR(1) CONSTRAINT Genders CHECK(Sex IN ('M','F','O')),
+Apt_No VARCHAR(20),
+Street VARCHAR(20),
+City VARCHAR(20),
 CState VARCHAR(2),
 Zipcode int CONSTRAINT Zip_Length CHECK (LENGTH(Zipcode)=5),
-Phone int CONSTRAINT Phone_Length CHECK(LENGTH(Phone)=10)
+Phone int UNIQUE CONSTRAINT Phone_Length CHECK(LENGTH(Phone)=10)
 );
 
 
@@ -254,6 +254,31 @@ INSERT INTO EMPLOYEE VALUES (016941, 1, 'Sales', 'Sharvi', 'Jaffery', 'F',TO_DAT
 INSERT INTO EMPLOYEE VALUES (016942, 1, 'Operations', 'Darren', 'Franco', 'M',TO_DATE('1993-08-29','YYYY-MM-DD'), 77000, 'Associate', 'd.franco@outlook.com', 8780076403, 019999);
 INSERT INTO EMPLOYEE VALUES (016943, 1, 'Operations', 'Cherry', 'Chan', 'O',TO_DATE('1997-01-05','YYYY-MM-DD'), 72000, 'Associate', 'chancherry05@gmail.com', 7699076403, 019999);
 INSERT INTO EMPLOYEE VALUES (019999, 1, 'Operations', 'Nick', 'Bilzerian','M',TO_DATE('1971-11-22','YYYY-MM-DD'), 107000, 'Lead Associate', 'bilznick71@gmail.com', 8000076403, 012324);
+
+-- Customer
+
+INSERT INTO Customer values('100000','John','Sander','12-05-1988','NE','M','14','Calumet St', 'Boston', 'MA', '12345', '9999999999');
+INSERT INTO Customer values('100001','Adam','Levine','11-04-1990','NE','M','14','Milk Street', 'Boston', 'MA', '12345', '9658365933');
+INSERT INTO Customer values('100002','Josh', 'Curry','11-04-1990','NE','M','15','Park Street', 'Boston', 'MA', '12345', '8572212077');
+INSERT INTO Customer values('100003','Lakshana','Kolur','07-11-1985','SE','F','05','South End Street', 'Boston', 'MA', '12345', '7575838485');
+INSERT INTO Customer values('100004','Clara','Goerge','21-07-1981','SE','F','03','Hill Road', 'Boston', 'MA', '12345', '7863542435');
+INSERT INTO Customer values('100005','Meghan','Ritter','01-11-1972','NE','F','14','Carter Street', 'Boston', 'MA', '12345', '8755235554');
+INSERT INTO Customer values('100006','Rajdeep','Mamtani','12-03-1979','SE','M','14','Mac Street', 'Allston', 'MA', '12345', '7843563450');
+INSERT INTO Customer values('100007','Sonal','Singh','18-01-1988','SE','F','23','Shipman Street', 'Allston', 'MA', '12345', '8954398443');
+INSERT INTO Customer values('100008','Jayashree','Kumari','14-06-1984','SE','F','14','India Street', 'Allston', 'MA', '12345', '9787837854');
+INSERT INTO Customer values('100009','Harper','Selter','06-06-1966','SE','F','11','Mass Ave', 'Cambridge', 'MA', '12345', '9827354354');
+INSERT INTO Customer values('100010','Amol', 'Srivatsav','09-05-1987','SE','O','08','Dennis Ave', 'Cambridge', 'MA', '12345', '9873455445');
+INSERT INTO Customer values('100011','Abhimanyu','Sarda','12-05-1990','NE','O','14','Huntington Ave', 'Cambridge', 'MA', '12345', '8754493433');
+INSERT INTO Customer values('100012','Amy', 'Hazarika','11-05-1987','NE','F','14','7th Ave', 'Cambridge', 'MA', '12345', '9865489380');
+INSERT INTO Customer values('100013', 'Tracy' ,'Zelensky','12-05-1988','SE','F','14','Light Road', 'Boston', 'MA', '12345', '7893548993');
+INSERT INTO Customer values('100014','Sharron', 'Naim','12-05-1988','SE','F','14','Sea Street', 'Boston', 'MA', '12345', '8889876543');
+INSERT INTO Customer values('100015','Charlie', 'Watson','12-05-1988','NE','F','14','13th Street', 'Amherst', 'MA', '12345', '7878676887');
+INSERT INTO Customer values('100016','Mrinal', 'Kumar','08-08-1991','NE','M','14','Curry Road', 'Amherst', 'MA', '12345', '7665687670');
+INSERT INTO Customer values('100017','Margot', 'Pincha','12-05-1988','SE','F','21','Belmont St', 'Amherst', 'MA', '12345', '8765432109');
+INSERT INTO Customer values('100018','Sowmya', 'Raghavan','12-05-1988','NE','M','14','Oak Road', 'Amherst', 'MA', '12345', '8765409876');
+INSERT INTO Customer values('100019','Anukriti','Joshi','19-09-1981','NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+
+
 
 
 
