@@ -73,5 +73,15 @@ CREATE or REPLACE VIEW branch_loan_count AS
   
   select * from account_stat ;
   
+  
+  
+    CREATE or REPLACE VIEW customer_account_count AS
+  select c.Customer_ID ,c.First_Name , c.Last_Name, count(AccountNumber)as account_count
+  from Customer c
+  inner join Account a
+  on c.Customer_ID = a.Customer_ID
+  Group by c.Customer_ID,c.First_Name,c.Last_Name
+  
+  select * from customer_account_count ;
     
     
