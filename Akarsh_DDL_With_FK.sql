@@ -255,8 +255,25 @@ INSERT INTO EMPLOYEE VALUES (016942, 1, 'Operations', 'Darren', 'Franco', 'M',TO
 INSERT INTO EMPLOYEE VALUES (016943, 1, 'Operations', 'Cherry', 'Chan', 'O',TO_DATE('1997-01-05','YYYY-MM-DD'), 72000, 'Associate', 'chancherry05@gmail.com', 7699076403, 019999);
 INSERT INTO EMPLOYEE VALUES (019999, 1, 'Operations', 'Nick', 'Bilzerian','M',TO_DATE('1971-11-22','YYYY-MM-DD'), 107000, 'Lead Associate', 'bilznick71@gmail.com', 8000076403, 012324);
 
--- Customer
+INSERT INTO Employee values(100101, 1,'Insurance','Ayushi','Patel', 'F',DATE '1980-11-08',25000,'Accountant','ayushipatel@gmail.com',7856912345, 012324);
+INSERT INTO Employee values(101101, 1,'Insurance','Ruchika','Sinha', 'F',DATE '1983-10-08',25000,'Accountant','ruchika19gmail.com',7856912389, 012324);
+INSERT INTO Employee values(102101, 2, 'Credit cards','Akshit','Arora', 'M',DATE '1990-10-08',60000,'clerk','akshit20arora@gmail.com',7856912333,055564);
+INSERT INTO Employee values(199111, 3,'Credit cards','Eddy','Sharma', 'M',DATE '1980-05-08',50000,'Provisionary Officer','eddysharma123@gmail.com',9999988889, 037567);
+INSERT INTO Employee values(104131, 1,'Insurance','Aditya','Tilak', 'M',DATE '1989-10-08',50000,'Banker','adityatilak@gmail.com',7856912322, 012324);
+INSERT INTO Employee values(105534, 3,'Private banking','Megshi','Thakur', 'F',DATE '1980-11-08',50000,'Clerk','megshithakur@gmail.com',7856912344, 037567);
+INSERT INTO Employee values(105745, 2,'Credit cards','Rinita','Srivastva', 'F',DATE '1967-10-08',50000,'Provisionary Officer','rini@yahoo.com',7856913214, 055564);
+INSERT INTO Employee values(107310, 3,'Credit cards','Sneha','Mohan', 'F',DATE '1999-10-08',90000,'Accountant','sneha@yahoo.com',7856913213, 037567);
+INSERT INTO Employee values(109557, 2,'Insurance','Sidhant','Kohli', 'M',DATE '1995-10-04',30000,'LIC','sid@yahoo.com',7856913220, 055564);
+INSERT INTO Employee values(110644, 3,'Private banking','Yash','Navadiya', 'M',DATE '1989-10-08',30000,'Accountant','yash@yahoo.com',7856913221, 037567);
+INSERT INTO Employee values(111101, 1,'Private banking','Virendra','Singh', 'M',DATE '1986-10-08',70000,'Clerk','viv@yahoo.com',7856913229, 012324);
+INSERT INTO Employee values(113104, 2,'Insurance','Radhika','Madan', 'F',DATE '1981-10-08',70000,'LIC','radhika@yahoo.com',7856913005, 055564);
+INSERT INTO Employee values(114107, 1,'Private banking','Boney','Singh', 'M',DATE '1980-10-08',70000,'LIC','bon@yahoo.com',7856913008, 02324);
+INSERT INTO Employee values(115005, 3,'Private banking','Disha','Parmar', 'F',DATE '1968-10-07',70000,'LIC','disha@yahoo.com',7856913007, 037567);
+INSERT INTO Employee values(118202, 2,'Private banking','Barkha','Duta', 'F',DATE '1966-11-08',70000,'Banker','barkhadutt@yahoo.com',7856913777, 055564);
+INSERT INTO Employee values(119324, 1,'Private banking','Mrinal','Sharma', 'F',DATE '1967-10-08',70000,'Banker','mrinal42@yahoo.com',7856914007, 012324);
+INSERT INTO Employee values(120424, 1,'Private banking','Apsara','Sharma', 'F',DATE '1964-10-08',70000,'Banker','mrinal@yahoo.com',7856914003, 012324);
 
+-- Customer
 INSERT INTO Customer values(100000,'John','Sander',TO_DATE('1998-05-19','YYYY-MM-DD'),'NE','M','14','Calumet St', 'Boston', 'MA', '12345', '9999999999');
 INSERT INTO Customer values(100001,'Adam','Levine',TO_DATE('1990-04-18','YYYY-MM-DD'),'NE','M','14','Milk Street', 'Boston', 'MA', '12345', '9658365933');
 INSERT INTO Customer values(100002,'Josh', 'Curry',TO_DATE('1990-03-13','YYYY-MM-DD'),'NE','M','15','Park Street', 'Boston', 'MA', '12345', '8572212077');
@@ -320,17 +337,12 @@ INSERT INTO Account_Status(account_number, status, created_date) VALUES (6428948
 INSERT INTO Account_Status(account_number, status, created_date) VALUES (70149340835549500, 'Active', '21-OCT-21');
 INSERT INTO Account_Status(account_number, status, created_date) VALUES (3719713158835400, 'InActive', '27-NOV-21');
 
+-- Branch Supplier
 
-
-
-
-
-
-
-
-
-
-
-
-
+INSERT INTO Branch_Supplier VALUES (1,'Secure Tech','Security',1);
+INSERT INTO Branch_Supplier VALUES (2,'Paper and Co','Envelops',2);
+INSERT INTO Branch_Supplier VALUES (3,'Baggit','Fabric Bag',3);
+INSERT INTO Branch_Supplier VALUES (4,'Electroplast','Hardware',1);
+INSERT INTO Branch_Supplier VALUES (5,'HomeDepot','Stationary',2);
+INSERT INTO Branch_Supplier VALUES (6,'BestBuy',' ',3);
 
