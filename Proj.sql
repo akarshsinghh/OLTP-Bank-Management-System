@@ -53,7 +53,7 @@ INSERT INTO Customer values('100012','Nayanika', 'Hazarika','11-05-1987','NE','M
 
 INSERT INTO Customer values('100013', 'Ritrisha' ,'Baruah','12-05-1988','SE','M','14','Fivestreet', 'Boston', 'MA', '12345', '7893548993');
 
-INSERT INTO Customer values('100014','Amol', 'Prakash','12-05-1988','SE','F','14','Onestreet', 'Boston', 'KA', '12345', '8889876543');
+INSERT INTO Customer values('100014','Amol', 'Prakash','12-05-1988','SE','F','14','Onestreet', 'Boston', 'MA', '12345', '8889876543');
 
 INSERT INTO Customer values('100015','Kiran', 'Kumar','12-05-1988','NE','M','14','Twostreet', 'Amherst', 'MA', '12345', '7878676887');
 
