@@ -83,5 +83,15 @@ CREATE or REPLACE VIEW branch_loan_count AS
   Group by c.Customer_ID,c.First_Name,c.Last_Name
   
   select * from customer_account_count ;
+  
+  
+  added some extra values to tha account table so that the count for customer should show more than one account , so repeated a few customer ids
+  
+ INSERT INTO Account VALUES (37197131588356700, 'Cheking', 'DMDD0454500', 100009, 1400);
+INSERT INTO Account VALUES (37197131588356800, 'Cheking', 'DMDD0454500', 100020, 1400);
+INSERT INTO Account VALUES (37197131588356900, 'Saving', 'DMDD0454500', 100009, 1400);
+INSERT INTO Account VALUES (37197131588355400, 'Saving', 'DMDD0454500', 100009, 1300);
+INSERT INTO Account VALUES (37197131588355600, 'Checking', 'DMDD0333100',100003 , 1300);
+INSERT INTO Account VALUES (37197131588355610, 'Saving', 'DMDD0333100',100003 , 1300);
     
     
