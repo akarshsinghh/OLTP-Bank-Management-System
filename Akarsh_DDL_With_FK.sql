@@ -285,7 +285,7 @@ INSERT INTO Customer values(100007,'Sonal','Singh',TO_DATE('1988-01-18','YYYY-MM
 INSERT INTO Customer values(100008,'Jayashree','Kumari',TO_DATE('1984-06-14','YYYY-MM-DD'),'SE','F','14','India Street', 'Allston', 'MA', '12345', '9787837854');
 INSERT INTO Customer values(100009,'Harper','Selter',TO_DATE('1966-06-06','YYYY-MM-DD'),'SE','F','11','Mass Ave', 'Cambridge', 'MA', '12345', '9827354354');
 INSERT INTO Customer values(100010,'Amol', 'Srivatsav',TO_DATE('1987-05-09','YYYY-MM-DD'),'SE','O','08','Dennis Ave', 'Cambridge', 'MA', '12345', '9873455445');
-INSERT INTO Customer values(100021,'Abhimanyu','Sarda',TO_DATE('1990-05-12','YYYY-MM-DD'),'NE','O','14','Huntington Ave', 'Cambridge', 'MA', '12345', '8754493433');
+INSERT INTO Customer values(100011,'Abhimanyu','Sarda',TO_DATE('1990-05-12','YYYY-MM-DD'),'NE','O','14','Huntington Ave', 'Cambridge', 'MA', '12345', '8754493433');
 INSERT INTO Customer values(100012,'Amy', 'Hazarika',TO_DATE('1987-05-11','YYYY-MM-DD'),'NE','F','14','7th Ave', 'Cambridge', 'MA', '12345', '9865489380');
 INSERT INTO Customer values(100013, 'Tracy' ,'Zelensky',TO_DATE('1988-05-12','YYYY-MM-DD'),'SE','F','14','Light Road', 'Boston', 'MA', '12345', '7893548993');
 INSERT INTO Customer values(100014,'Sharron', 'Naim',TO_DATE('1988-07-13','YYYY-MM-DD'),'SE','F','14','Sea Street', 'Boston', 'MA', '12345', '8889876543');
