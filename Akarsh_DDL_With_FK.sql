@@ -1,3 +1,11 @@
+--create user appadmin identified by "NEU@BostonCampus2022#";
+
+--grant connect,resource to appadmin;
+
+--alter user appadmin default tablespace data ;
+
+--alter user appadmin quota unlimited on data;
+
 SET SERVEROUTPUT ON;
 
 declare
@@ -43,9 +51,12 @@ Loan_Type number(1) CHECK (Loan_Type > 0),
 Status Varchar (20),
 Approved_By_ID int,
 Sanction_Date date,
-Duration decimal (2,2),
+Duration decimal (4,2),
 CONSTRAINT check_loan_period
-  CHECK (Duration between 0 and 50)
+  CHECK (Duration between 0 and 50),
+CONSTRAINT left_to_pay
+  CHECK (Principal> Outstanding)
+  
 );
 
 
@@ -166,7 +177,7 @@ PRIMARY KEY (AccountNumber)
 
  CREATE TABLE LOAN_TYPE
 ( Loan_Type number(1) PRIMARY KEY CHECK (Loan_Type > 0),
-Interest_Rate decimal (2,2) CONSTRAINT positive_interest_rate CHECK (Interest_Rate > 0),
+Interest_Rate decimal (4,2) CONSTRAINT positive_interest_rate CHECK (Interest_Rate > 0),
 Category varchar (20) NOT NULL
 );
 
@@ -221,57 +232,6 @@ ALTER TABLE Loan_Interest ADD CONSTRAINT FK_Loan_Interst_Loan_Type FOREIGN KEY (
 -- Works With
 ALTER TABLE Works_With ADD CONSTRAINT FK_Works_With_Emp FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID) ON DELETE CASCADE;
 ALTER TABLE Works_With ADD CONSTRAINT FK_Works_With_Customer FOREIGN KEY (Customer_ID) REFERENCES Customer(Customer_ID) ON DELETE CASCADE;
-INSERT INTO WORKS_WITH VALUES(100000,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100001,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100002,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100003,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100004,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100005,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100006,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100007,114107,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100008,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100009,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100010,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100011,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100012,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100013,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100014,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100015,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100016,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100017,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100018,119324,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100019,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100020,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100021,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100022,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100023,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100024,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100025,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100026,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100027,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100028,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100029,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100030,118202,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100031,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100032,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100033,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100034,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100035,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100036,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100037,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100038,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100039,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100040,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100041,115005,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100042,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100043,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100044,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100045,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100046,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100047,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100048,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100049,111101,'Loan_Approval');
-INSERT INTO WORKS_WITH VALUES(100050,111101,'Loan_Approval');
 
 -- Employee
 ALTER TABLE Employee ADD CONSTRAINT FK_Emp_Branch FOREIGN KEY (Branch_ID) REFERENCES Branch(Branch_ID) ON DELETE CASCADE;
@@ -283,6 +243,15 @@ ALTER TABLE Employee ADD CONSTRAINT FK_Emp_Branch FOREIGN KEY (Branch_ID) REFERE
 INSERT INTO BRANCH VALUES ('DMDD0454500',1,'405 Huntington Ave','Park Street','Boston','MA',02120,012324);
 INSERT INTO BRANCH VALUES ('DMDD0101022',2,'111 Howard Ave','Tremont Street','Boston','MA',02180,055564);
 INSERT INTO BRANCH VALUES ('DMDD0333100',3,'333 Longwood Ave','Milk Street','Boston','MA',02190,037567);
+
+-- Branch Supplier
+
+INSERT INTO Branch_Supplier VALUES (1,'Secure Tech','Security',1);
+INSERT INTO Branch_Supplier VALUES (2,'Paper and Co','Envelops',2);
+INSERT INTO Branch_Supplier VALUES (3,'Baggit','Fabric Bag',3);
+INSERT INTO Branch_Supplier VALUES (4,'Electroplast','Hardware',1);
+INSERT INTO Branch_Supplier VALUES (5,'HomeDepot','Stationary',2);
+INSERT INTO Branch_Supplier VALUES (6,'BestBuy',' ',3);
 
 -- Data Inserting Employee
 INSERT INTO EMPLOYEE VALUES (012324, 1, 'Research', 'Akarsh', 'Singh', 'M',TO_DATE('1999-03-09','YYYY-MM-DD'), 120000, 'Branch Manager', 'akarshsinghh@gmail.com', 7710037766, '');
@@ -345,50 +314,31 @@ INSERT INTO Customer values(100016,'Mrinal', 'Kumar',TO_DATE('1991-08-08','YYYY-
 INSERT INTO Customer values(100017,'Margot', 'Pincha',TO_DATE('1996-03-13','YYYY-MM-DD'),'SE','F','21','Belmont St', 'Amherst', 'MA', '12345', '8765432109');
 INSERT INTO Customer values(100019,'Sowmya', 'Raghavan',TO_DATE('1994-04-19','YYYY-MM-DD'),'NE','M','14','Oak Road', 'Amherst', 'MA', '12345', '8765409876');
 INSERT INTO Customer values(100020,'Anukriti','Joshi',TO_DATE('1989-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100021,'Greg','Mathew',TO_DATE('1988-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100022,'Jhon','Mat',TO_DATE('1988-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100023,'Charlie','Chap',TO_DATE('1988-05-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100024,'Samiksha','Bhatnagar',TO_DATE('1999-05-19','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100025,'Bardia','Moem',TO_DATE('1979-08-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100026,'Veer','Singh',TO_DATE('1993-08-16','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100027,'Akansha','Tarun',TO_DATE('1990-08-20','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100028,'James','Adam',TO_DATE('1990-09-20','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100029,'Kendall','Jen',TO_DATE('1996-04-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100030,'Kris','Brown',TO_DATE('1995-04-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100031,'Cam','Cristopher',TO_DATE('1992-03-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100032,'Cam','Cristopher',TO_DATE('1992-03-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100033,'Emily','Swan',TO_DATE('1990-03-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100034,'Rose','Melott',TO_DATE('1967-01-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100035,'Billy','Adam',TO_DATE('1966-01-27','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100036,'Hunter','Rodrigo',TO_DATE('1963-04-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100037,'Eddy','Rodrigo',TO_DATE('1960-04-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100038,'Anumeha','Jain',TO_DATE('1968-04-25','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100039,'Saurav','Ganguly',TO_DATE('1956-04-29','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100040,'Maddy','Adam',TO_DATE('1998-04-29','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100041,'Vasu','Gupta',TO_DATE('1994-04-18','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100042,'Jain','Malik',TO_DATE('1994-04-12','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100043,'Daniel','Rick',TO_DATE('1992-04-14','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100044,'Ranbir','Sohni',TO_DATE('1986-04-14','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100045,'Dwanye','Jhon',TO_DATE('1985-04-15','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100046,'Dipika','Sharma',TO_DATE('1983-03-17','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100047,'Ariana','James',TO_DATE('1991-03-17','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100048,'Emma','Rhodes',TO_DATE('1995-02-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Boston', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100049,'Eva','Reeds',TO_DATE('1998-02-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Amherst', 'MA', '12345', '8754290454');
-INSERT INTO Customer values(100050,'Nick','Brown',TO_DATE('1998-06-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
 
 --Account 
-
-INSERT INTO Account VALUES (3719713158835300, 'Savings', 'DMDD0454500', 100019, 1500);
-INSERT INTO Account VALUES (71086643758945400, 'Savings', 'DMDD0101022',100020, 2000);
-INSERT INTO Account VALUES (3690859741294280, 'Savings', 'DMDD0454500', 100001, 8056);
-INSERT INTO Account VALUES (37530666568966100, 'Savings', 'DMDD0333100', 100002, 3098);
-INSERT INTO Account VALUES (70048841700216300, 'Savings', 'DMDD0454500', 100003, 5000);
-INSERT INTO Account VALUES (89135767380499400, 'Savings', 'DMDD0101022', 100004, 2500);
-INSERT INTO Account VALUES (12494980148173100, 'Checking', 'DMDD0333100', 100005, 3500);
-INSERT INTO Account VALUES (8744336085399580, 'Checking', 'DMDD0101022', 100006, 1890);
-INSERT INTO Account VALUES (64289489845768000, 'Checking', 'DMDD0454500', 100007, 1051);
-INSERT INTO Account VALUES (70149340835549500, 'Checking', 'DMDD0333100', 100008, 1053);
-INSERT INTO Account VALUES (3719713158835400, 'Savings', 'DMDD0454500', 100009, 1500);
+INSERT INTO Account VALUES (3719713158855555, 'Savings', 'DMDD0454500', 100000, 16500);
+INSERT INTO Account VALUES (3719713158835300, 'Savings', 'DMDD0454500', 100001, 1500);
+INSERT INTO Account VALUES (71086643758945400, 'Savings', 'DMDD0101022',100002, 2090);
+INSERT INTO Account VALUES (3690859741294280, 'Savings', 'DMDD0454500', 100003, 8056);
+INSERT INTO Account VALUES (37530666568966100, 'Savings', 'DMDD0333100', 100004, 3098);
+INSERT INTO Account VALUES (70048841700216300, 'Savings', 'DMDD0454500', 100005, 5054);
+INSERT INTO Account VALUES (89135767380499400, 'Savings', 'DMDD0101022', 100006, 25456);
+INSERT INTO Account VALUES (12494980148173100, 'Checking', 'DMDD0333100', 100007, 35535);
+INSERT INTO Account VALUES (8744336085399580, 'Checking', 'DMDD0101022', 100008, 1890);
+INSERT INTO Account VALUES (64289489845768000, 'Checking', 'DMDD0454500', 100009, 10516);
+INSERT INTO Account VALUES (70149340835549500, 'Checking', 'DMDD0333100', 100010, 10538);
+INSERT INTO Account VALUES (1359713158835400, 'Savings', 'DMDD0333100', 100011, 1564.96);
+INSERT INTO Account VALUES (7599713158835400, 'Savings', 'DMDD0454500', 100012, 18000.56);
+INSERT INTO Account VALUES (9009713158835400, 'Savings', 'DMDD0101022', 100013, 7795);
+INSERT INTO Account VALUES (1212713158835400, 'Savings', 'DMDD0333100', 100014, 900.99);
+INSERT INTO Account VALUES (8880713158835400, 'Savings', 'DMDD0454500', 100015, 3486);
+INSERT INTO Account VALUES (1289713158835400, 'Savings', 'DMDD0101022', 100016, 4200);
+INSERT INTO Account VALUES (9560713158835400, 'Savings', 'DMDD0333100', 100017, 34600);
+INSERT INTO Account VALUES (3719713158839988, 'Savings', 'DMDD0101022', 100019, 13003);
+INSERT INTO Account VALUES (3719713158837659, 'Savings', 'DMDD0333100', 100020, 6305);
+INSERT INTO Account VALUES (13719713158835300, 'Checking', 'DMDD0101022', 100011, 1890);
+INSERT INTO Account VALUES (1086643758945400, 'Checking', 'DMDD0454500', 100012, 10516);
+INSERT INTO Account VALUES (53153834006064000, 'Checking', 'DMDD0333100', 100013, 10538);
 
 --Account Interest
 
@@ -402,7 +352,7 @@ INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (1
 INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (8744336085399580, 'DMDD0101022', '01-AUG-21');
 INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (64289489845768000, 'DMDD0454500', '01-SEP-21');
 INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (70149340835549500, 'DMDD0333100', '01-OCT-21');
-INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (3719713158835400, 'DMDD0454500', '01-JAN-21');
+INSERT INTO Account_Interest(account_number, branchifsc, created_date) VALUES (8880713158835400, 'DMDD0454500', '01-JAN-21');
 
 --Account Status
 
@@ -416,14 +366,79 @@ INSERT INTO Account_Status(account_number, status, created_date) VALUES (1249498
 INSERT INTO Account_Status(account_number, status, created_date) VALUES (8744336085399580, 'Active', '03-AUG-21');
 INSERT INTO Account_Status(account_number, status, created_date) VALUES (64289489845768000, 'Active', '02-SEP-21');
 INSERT INTO Account_Status(account_number, status, created_date) VALUES (70149340835549500, 'Active', '21-OCT-21');
-INSERT INTO Account_Status(account_number, status, created_date) VALUES (3719713158835400, 'InActive', '27-NOV-21');
 
--- Branch Supplier
 
-INSERT INTO Branch_Supplier VALUES (1,'Secure Tech','Security',1);
-INSERT INTO Branch_Supplier VALUES (2,'Paper and Co','Envelops',2);
-INSERT INTO Branch_Supplier VALUES (3,'Baggit','Fabric Bag',3);
-INSERT INTO Branch_Supplier VALUES (4,'Electroplast','Hardware',1);
-INSERT INTO Branch_Supplier VALUES (5,'HomeDepot','Stationary',2);
-INSERT INTO Branch_Supplier VALUES (6,'BestBuy',' ',3);
+--Loan Type
+
+INSERT INTO LOAN_TYPE values (1,5.50,'Personal Loan');
+INSERT INTO LOAN_TYPE values (2,10.00,'Home Loan');
+INSERT INTO LOAN_TYPE values (3,8.00,'Business Loan');
+INSERT INTO LOAN_TYPE values (4,7.50,'Education Loan');
+-- Loan
+INSERT INTO LOAN values(44689319,100000,'DMDD0333100',500,399, 1,'Active',100101,TO_DATE('2021-04-09','YYYY-MM-DD'),5.50);
+INSERT INTO LOAN values(77489838,100001,'DMDD0101022',2000,800, 2,'Active',104131,TO_DATE('1999-03-11','YYYY-MM-DD'),10.00);
+INSERT INTO LOAN values(63892734,100002,'DMDD0454500',690,0.1, 3,'Inactive',056942,TO_DATE('2015-05-20','YYYY-MM-DD'),8.00);
+INSERT INTO LOAN values(63234734,100003,'DMDD0101022',8090,5070, 1,'Active',016940,TO_DATE('2005-10-10','YYYY-MM-DD'),5.50);
+INSERT INTO LOAN values(18467484,100004,'DMDD0454500',5000,0.1, 2,'Inactive',036942,TO_DATE('2021-11-20','YYYY-MM-DD'),10.00);
+INSERT INTO LOAN values(13892736,100005,'DMDD0333100',2000,800, 3,'Active',019999,TO_DATE('2010-09-20','YYYY-MM-DD'),8.00);
+INSERT INTO LOAN values(53892734,100006,'DMDD0101022',600,500, 4,'Active',102101,TO_DATE('2000-06-02','YYYY-MM-DD'),7.50);
+INSERT INTO LOAN values(61292734,100007,'DMDD0454500',20000,10000, 2,'Active',115005,TO_DATE('1991-05-10','YYYY-MM-DD'),10.00);
+
+--Loan Transactions
+INSERT 
+
+-- TRANSACTIONS
+
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940301, 13719713158835300, 1086643758945400, 'DMDD0454500','DMDD0101022','20.00',DATE '2021-03-08','sent $20', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940301, 53153834006064000, 3719713158855555, 'DMDD0101022','DMDD0454500','40.00',DATE '2021-04-11','Amount $40 Transferred', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940302, 37530666568966100, 70048841700216300, 'DMDD0333100','DMDD0454500','250.00',DATE '2022-10-10','sent $250', 'Pending');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940303, 89135767380499400, 12494980148173100, 'DMDD0101022','DMDD0333100','50.00',DATE '2020-11-08','sent $50', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940304, 8744336085399580, 64289489845768000, 'DMDD0101022','DMDD0454500','330.00',DATE '2021-04-08','sent $330', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940305, 70149340835549500, 13719713158835300, 'DMDD0333100','DMDD0454500','150.00',DATE '2020-05-18','sent $150', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940306,9560713158835400 ,9009713158835400 , 'DMDD0454500','DMDD0101022','120.00',DATE '2021-02-23','sent $120', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940307, 53153834006064000, 3690859741294280, 'DMDD0101022','DMDD0454500','400.00',DATE '2020-08-05','Amount $400 Transferred', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940308, 37530666568966100, 70048841700216300, 'DMDD0333100','DMDD0454500','500.00',DATE '2022-01-18','sent $500', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940309, 89135767380499400, 12494980148173100, 'DMDD0101022','DMDD0333100','350.00',DATE '2021-07-28','sent $350', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940310, 8744336085399580, 64289489845768000, 'DMDD0101022','DMDD0454500','444.00',DATE '2021-10-04','sent $444', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940311, 70149340835549500, 13719713158835300, 'DMDD0333100','DMDD0454500','100.00',DATE '2021-02-11','sent $100', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940312, 13719713158835300, 1086643758945400, 'DMDD0454500','DMDD0101022','1000.00',DATE '2021-03-08','sent $1000', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940313, 53153834006064000, 3690859741294280, 'DMDD0101022','DMDD0454500','700.00',DATE '2021-08-29','Amount $700 Transferred', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940314, 37530666568966100, 70048841700216300, 'DMDD0333100','DMDD0454500','750.00',DATE '2021-10-10','sent $750', 'Pending');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940315, 89135767380499400, 12494980148173100, 'DMDD0101022','DMDD0333100','55.00',DATE '2020-11-09','sent $55', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940316, 8744336085399580, 64289489845768000, 'DMDD0101022','DMDD0454500','360.00',DATE '2021-06-03','sent $360', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940317, 70149340835549500, 13719713158835300, 'DMDD0333100','DMDD0454500','66.00',DATE '2020-09-03','sent $66', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1203876940318, 13719713158835300, 1086643758945400, 'DMDD0454500','DMDD0101022','450.00',DATE '2021-08-01','sent $450', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940319, 53153834006064000, 3690859741294280, 'DMDD0101022','DMDD0454500','600.00',DATE '2021-01-01','Amount $600 Transferred', 'Success');
+insert into TRANSACTIONS(Tansaction_ID, Debit_Account,Credit_Account,IFSC_Code_Debit,IFSC_Code_Credit, Amount,  Transaction_date,Message,Status) Values
+(1103876940320, 37530666568966100, 70048841700216300, 'DMDD0333100','DMDD0454500','60.00',DATE '2022-04-13','sent $60', 'Success');
+
+--  Works With
+--INSERT INTO WORKS_WITH VALUES  (100000,,)
+
+
+
+-- FIrst Create a script to define users and specific acess
+-- Login as users who has full acess
+-- run the script
+
 
