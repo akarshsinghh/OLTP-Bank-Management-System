@@ -1,7 +1,7 @@
 --create user appadmin identified by "NEU@BostonCampus2022#";
 
 --grant connect,resource to appadmin;
-
+--
 --alter user appadmin default tablespace data ;
 
 --alter user appadmin quota unlimited on data;
