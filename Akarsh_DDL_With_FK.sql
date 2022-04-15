@@ -294,6 +294,36 @@ INSERT INTO Customer values(100016,'Mrinal', 'Kumar',TO_DATE('1991-08-08','YYYY-
 INSERT INTO Customer values(100017,'Margot', 'Pincha',TO_DATE('1996-03-13','YYYY-MM-DD'),'SE','F','21','Belmont St', 'Amherst', 'MA', '12345', '8765432109');
 INSERT INTO Customer values(100019,'Sowmya', 'Raghavan',TO_DATE('1994-04-19','YYYY-MM-DD'),'NE','M','14','Oak Road', 'Amherst', 'MA', '12345', '8765409876');
 INSERT INTO Customer values(100020,'Anukriti','Joshi',TO_DATE('1989-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100021,'Greg','Mathew',TO_DATE('1988-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100022,'Jhon','Mat',TO_DATE('1988-03-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100023,'Charlie','Chap',TO_DATE('1988-05-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100024,'Samiksha','Bhatnagar',TO_DATE('1999-05-19','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100025,'Bardia','Moem',TO_DATE('1979-08-15','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100026,'Veer','Singh',TO_DATE('1993-08-16','YYYY-MM-DD'),'NE','M','14','Darling St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100027,'Akansha','Tarun',TO_DATE('1990-08-20','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100028,'James','Adam',TO_DATE('1990-09-20','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100029,'Kendall','Jen',TO_DATE('1996-04-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100030,'Kris','Brown',TO_DATE('1995-04-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100031,'Cam','Cristopher',TO_DATE('1992-03-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100032,'Cam','Cristopher',TO_DATE('1992-03-21','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100033,'Emily','Swan',TO_DATE('1990-03-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100034,'Rose','Melott',TO_DATE('1967-01-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100035,'Billy','Adam',TO_DATE('1966-01-27','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100036,'Hunter','Rodrigo',TO_DATE('1963-04-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100037,'Eddy','Rodrigo',TO_DATE('1960-04-23','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100038,'Anumeha','Jain',TO_DATE('1968-04-25','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100039,'Saurav','Ganguly',TO_DATE('1956-04-29','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100040,'Maddy','Adam',TO_DATE('1998-04-29','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100041,'Vasu','Gupta',TO_DATE('1994-04-18','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100042,'Jain','Malik',TO_DATE('1994-04-12','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100043,'Daniel','Rick',TO_DATE('1992-04-14','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100044,'Ranbir','Sohni',TO_DATE('1986-04-14','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100045,'Dwanye','Jhon',TO_DATE('1985-04-15','YYYY-MM-DD'),'NE','M','14','Tremont St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100046,'Dipika','Sharma',TO_DATE('1983-03-17','YYYY-MM-DD'),'NE','M','14','Darling St', 'Cambridge', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100047,'Ariana','James',TO_DATE('1991-03-17','YYYY-MM-DD'),'NE','M','14','Darling St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100048,'Emma','Rhodes',TO_DATE('1995-02-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Boston', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100049,'Eva','Reeds',TO_DATE('1998-02-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Amherst', 'MA', '12345', '8754290454');
+INSERT INTO Customer values(100050,'Nick','Brown',TO_DATE('1998-06-10','YYYY-MM-DD'),'NE','M','14','Roxbury St', 'Cambridge', 'MA', '12345', '8754290454');
 
 --Account 
 
