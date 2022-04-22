@@ -23,7 +23,7 @@ BEGIN
 
 select count(*) into v_lacc from loan where i_loan_acc_no=loanaccnumber;
 select count(*) into v_cifsc from loan where loanaccnumber = i_loan_acc_no;
-select count(*) into v_difsc from branch where branchifsc IN (select branchifsc from branch);
+select count(*) into v_difsc from branch where branchifsc IN (select branchifsc from branch) and branchifsc = i_branchifsc;
 select outstanding into v_amount from loan where loanaccnumber = i_loan_acc_no;
 select sysdate into tdate from dual;
 
@@ -34,7 +34,7 @@ raise e_length;
 end if;
 
 if  v_lacc=1 then
-dbms_output.put_line('Account Numbers Have Sucessfully been Validated');
+dbms_output.put_line('Loan Account Number Have Sucessfully been Validated');
 dbms_output.put_line('..');
 dbms_output.put_line('......');
 dbms_output.put_line('.............');
