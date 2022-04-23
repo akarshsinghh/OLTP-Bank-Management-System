@@ -237,11 +237,92 @@ END;
                                       
 exec promotion(36940,'provisionary officer');   /// do not copy this in code
                                       
-                       
+ -------------------------------------------------------------------
                                       
                                       
                                       
                                       
                                       
+                  ----------------------------------------------------------------
+CREATE OR REPLACE TRIGGER TRANSACTION_TRIG 
+BEFORE INSERT ON  LOAN_TRANSACTIONS
+FOR EACH ROW
+DECLARE 
+LOAN_TYPE NUMBER := 0;
+Loan_COUNT number := 0;
+AMT NUMBER := 0;
+HIGH_LIMIT EXCEPTION;
+
+BEGIN 
+
+SELECT COUNT(*)
+INTO LOAN_COUNT 
+FROM LOAN
+WHERE LoanAccNumber = :NEW.LoanAccNumber;
+
+DBMS_OUTPUT.PUT_LINE(LOAN_COUNT);
+IF LOAN_COUNT > 0 THEN
+
+    SELECT Loan_Type 
+    INTO LOAN_TYPE 
+    FROM LOAN
+    WHERE (LoanAccNumber = :NEW.LoanAccNumber) ;
+    
+    AMT := :NEW.AMOUNT;
+    
+    IF LOAN_TYPE = 1 THEN 
+        
+        IF AMT > 5000 THEN
+            RAISE HIGH_LIMIT;
+        END IF;
+        
+    ELSIF LOAN_TYPE = 3 THEN
+    
+         IF AMT > 10000 THEN
+            RAISE HIGH_LIMIT;
+         END IF;
+    
+    ELSIF LOAN_TYPE = 4 THEN 
+        
+         IF AMT > 7000 THEN
+            RAISE HIGH_LIMIT;
+         END IF;
+    
+    ELSE 
+        DBMS_OUTPUT.PUT_LINE('WITHIN LIMIT');
+    END IF;
+    
+END IF;
+
+EXCEPTION 
+    WHEN HIGH_LIMIT THEN
+    RAISE_APPLICATION_ERROR(-20100,'PLEASE FOLLOW AMOUNT TRANSACTION LIMIT AS PER YOUR LOAN TYPE');
+
+END;
+/
+
+----------------- procedure for loan transaction----------
+
+
+CREATE OR REPLACE PROCEDURE LOAN_TRANSACTION(LID IN NUMBER, BIFSC IN VARCHAR, LIFSC IN VARCHAR, LOAN_ACC IN NUMBER, AMT IN NUMBER, DT IN DATE)
+AS
+TRIG_ERROR EXCEPTION;
+PRAGMA EXCEPTION_INIT(TRIG_ERROR,-20100);
+
+BEGIN
+
+INSERT INTO LOAN_TRANSACTIONS
+VALUES (LID,BIFSC,LIFSC,LOAN_ACC,AMT,DT);
+
+EXCEPTION
+    
+    WHEN TRIG_ERROR THEN
+    DBMS_OUTPUT.PUT_LINE('PLEASE FOLLOW AMOUNT TRANSACTION LIMIT AS PER YOUR LOAN TYPE');
+    
+     WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('INVALID ERROR');
+
+END;
+/                    
                                       
                                       
