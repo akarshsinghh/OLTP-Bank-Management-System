@@ -1,0 +1,176 @@
+CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH DATE,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER, AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
+AS
+
+ID_NOT_ENTERED EXCEPTION;
+FirstNameMissing EXCEPTION;
+LastNameMissing EXCEPTION;
+MissingDOB EXCEPTION;
+IncorrectDOB EXCEPTION;
+WorksAtMissing EXCEPTION;
+GenderMissing EXCEPTION;
+GenderIncorrect EXCEPTION;
+ApartmentNumberMissing EXCEPTION;
+StreetMissing EXCEPTION ;
+CityMissing EXCEPTION;
+StateMissing EXCEPTION;
+ZipMissing EXCEPTION;
+ZipIncorrect EXCEPTION;
+ContactMissing EXCEPTION;
+ContactIncorrect EXCEPTION;
+
+AccountNumberMissing EXCEPTION;
+AccountNumberIncorrect EXCEPTION;
+AccountTypeMissing EXCEPTION;
+AccountTypeIncorrect EXCEPTION;
+IFSCMissing EXCEPTION;
+IFSCIncorrect EXCEPTION;
+BalanceMissing EXCEPTION;
+BalanceNegative EXCEPTION;
+
+BEGIN 
+IF CustomerID IS NULL THEN
+    RAISE ID_NOT_ENTERED ;
+ELSIF FirstName IS NULL THEN
+    RAISE FirstNameMissing;
+ELSIF LastName IS NULL THEN
+    RAISE LastNameMissing;
+ELSIF DATEOFBIRTH IS NULL THEN
+    RAISE MissingDOB;
+
+ELSIF Worksat IS NULL THEN
+    RAISE WorksAtMissing;
+ELSIF Gender IS NULL THEN
+    RAISE GenderMissing;
+ELSIF Gender NOT IN ('M','F','O') THEN
+    RAISE GenderIncorrect;
+ELSIF AptNo IS NULL THEN
+    RAISE ApartmentNumberMissing;
+ELSIF ADDRESSLINE1 IS NULL THEN
+    RAISE StreetMissing;
+ELSIF ADDRESSLINE2 IS NULL THEN
+    RAISE CityMissing;
+ELSIF ADDRESSLINE3 IS NULL THEN
+    RAISE StateMissing;
+ELSIF AptNo IS NULL THEN
+    RAISE ZipMissing;
+ELSIF LENGTH(Zip)<>5 THEN
+    RAISE ZipIncorrect;
+ELSIF Contact IS NULL THEN
+    RAISE ContactMissing;
+ELSIF LENGTH(Contact)<>10 THEN
+    RAISE ContactIncorrect;
+    
+ELSIF AccNo IS NULL THEN
+    RAISE AccountNumberMissing;
+ELSIF Length(AccNo) <> 16 THEN
+    RAISE AccountNumberIncorrect;
+ELSIF AccType IS NULL THEN
+    RAISE AccountTypeMissing;
+ELSIF AccType NOT IN ('checking','savings') THEN
+    RAISE AccountTypeIncorrect;
+ELSIF Branch IS NULL THEN
+    RAISE IFSCMissing;
+ELSIF Length(Branch) <> 11 THEN
+    RAISE IFSCIncorrect;
+ELSIF Length(Branch) <> 11 THEN
+    RAISE IFSCIncorrect;
+ELSIF OpeningBalance IS NULL THEN
+    RAISE BalanceMissing;
+ELSIF OpeningBalance<0 OR OpeningBalance=0 THEN
+    RAISE BalanceNegative;
+
+END IF;
+
+
+INSERT INTO CUSTOMER VALUES(
+CustomerID,
+FirstName,
+LastName,
+DATEOFBIRTH,
+Worksat,
+Gender,
+AptNo,
+ADDRESSLINE1,
+ADDRESSLINE2,
+ADDRESSLINE3,
+Zip,
+Contact);
+
+INSERT INTO Account VALUES (AccNo, AccType, Branch, CustomerID, OpeningBalance);
+
+
+EXCEPTION
+
+    WHEN ID_NOT_ENTERED THEN 
+    DBMS_OUTPUT.PUT_LINE('Customer ID cannot be empty');
+    
+    WHEN FirstNameMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Fisrt Name cannot be empty');
+     
+    WHEN LastNameMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Last Name cannot be empty');
+     
+    WHEN MissingDOB THEN
+     DBMS_OUTPUT.PUT_LINE('The Date of birth cannot be empty');
+    
+    WHEN IncorrectDOB THEN
+     DBMS_OUTPUT.PUT_LINE('The year of birth cannot be less than 2004');
+     
+    WHEN WorksAtMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Works at cannot be empty');
+     
+    WHEN GenderMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Gender cannot be empty'); 
+     
+    WHEN GenderIncorrect THEN
+     DBMS_OUTPUT.PUT_LINE('The gender must be selected from M, F & O');  
+     
+    WHEN ApartmentNumberMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The apartment number cannot be empty');
+     
+    WHEN StreetMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The street cannot be empty');
+     
+    WHEN CityMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The city cannot be empty');
+     
+    WHEN ZipMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The zip code must be proviced');
+     
+    WHEN ZipIncorrect THEN
+     DBMS_OUTPUT.PUT_LINE('Incorrect zipcode');
+     
+    WHEN IFSCMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The contact number cannot be empty');
+     
+    WHEN IFSCIncorrect THEN
+     DBMS_OUTPUT.PUT_LINE('Incorrect Contact Number');
+     
+    WHEN AccountNumberMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Account Number cannot be empty');
+     
+    WHEN AccountNumberIncorrect THEN
+     DBMS_OUTPUT.PUT_LINE('Incorrect Account Number');
+     
+    WHEN AccountTypeMissing THEN
+     DBMS_OUTPUT.PUT_LINE('Account type is missing');
+     
+    WHEN AccountTypeIncorrect THEN
+     DBMS_OUTPUT.PUT_LINE('Account type must be from savings/checkin');
+     
+    WHEN BalanceMissing THEN
+     DBMS_OUTPUT.PUT_LINE('The opening balance cannot be  null');
+     
+    WHEN BalanceNegative THEN
+     DBMS_OUTPUT.PUT_LINE('The opening balance must be positive');
+     
+
+END;
+
+
+
+
+
+
+
+
