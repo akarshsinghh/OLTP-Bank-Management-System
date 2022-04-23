@@ -324,5 +324,45 @@ EXCEPTION
 
 END;
 /                    
+                                     
+-------------------------------------------------------------------------------------------------
                                       
-                                      
+                                      INSERT INTO EMPLOYEE VALUES (012324, 1, 'Research', 'Akarsh', 'Singh', 'M',TO_DATE('1999-03-09','YYYY-MM-DD'), 120000, 'Accountant', 'akarshsinghh@gmail.com', 7710037766, '');
+INSERT INTO EMPLOYEE VALUES (055564, 2, 'Sales', 'Alex', 'ONeil', 'M',TO_DATE('1997-10-06','YYYY-MM-DD'), 115000, 'Accountant', 'neilalex32@gmail.com', 8910037766, '');
+INSERT INTO EMPLOYEE VALUES (037567, 3, 'Sales', 'Kylie', 'James', 'F',TO_DATE('1992-11-01','YYYY-MM-DD'), 130000, 'Accountant', 'thekyliejames@outlook.com', 8910032459, '');
+INSERT INTO EMPLOYEE VALUES (036940, 3, 'Sales', 'Megan', 'Smith', 'F',TO_DATE('1999-06-30','YYYY-MM-DD'), 67000, 'Accountant', 'megans30@outlook.com', 8910076403, 037567);
+INSERT INTO EMPLOYEE VALUES (036113, 3, 'Software', 'Ravi', 'Teja', 'M',TO_DATE('1998-06-13','YYYY-MM-DD'), 90000, 'Developer', 'tejaravi_tv@gmail.com', 8570076403, '');
+INSERT INTO EMPLOYEE VALUES (036999, 3, 'Sales', 'Charlottee', 'Malik', 'F',TO_DATE('1997-02-12','YYYY-MM-DD'), 75000, 'Provisionary Officer', 'mcharlottee@outlook.com', 8579076403, 037567);
+INSERT INTO EMPLOYEE VALUES (036941, 3, 'Marketing', 'Chang', 'Cho', 'O',TO_DATE('1995-03-24','YYYY-MM-DD'), 77000, 'Provisionary Officer', 'chochangg@outlook.com', 8910076507, '');
+INSERT INTO EMPLOYEE VALUES (036942, 3, 'Operations', 'John', 'Ledger', 'M',TO_DATE('1998-06-17','YYYY-MM-DD'), 85000, 'Provisionary Officer', 'johnl@yahoo.com', 8910071122, 011818);
+INSERT INTO EMPLOYEE VALUES (036933, 3, 'Operations', 'Mark', 'Benetton', 'M',TO_DATE('1997-10-30','YYYY-MM-DD'), 84000, 'Accountant', 'markbene@outlook.com', 8910072241, 011818);
+INSERT INTO EMPLOYEE VALUES (011818, 3, 'Operations', 'Grace', 'Fernandes', 'F',TO_DATE('1982-09-27','YYYY-MM-DD'), 93000, 'Accountant', 'gracefernandes30@gmail.com', 8910078979, 037567);
+INSERT INTO EMPLOYEE VALUES (056940, 2, 'Sales', 'Josh', 'Jacobs', 'M',TO_DATE('1987-07-18','YYYY-MM-DD'), 69000, 'Accountant', 'srjjacobs@outlook.com', 7120076403,055564);
+INSERT INTO EMPLOYEE VALUES (056941, 2, 'Sales', 'Megan', 'Smith', 'F',TO_DATE('1999-06-30','YYYY-MM-DD'), 67000, 'Accountant', 'megansmithh@yahoo.com', 7770076403,055564);
+INSERT INTO EMPLOYEE VALUES (056942, 2, 'Operations', 'Elle', 'Bridge', 'F',TO_DATE('1996-08-29','YYYY-MM-DD'), 72000, 'Associate', 'bridgeelle101@outlook.com', 8880072403, 059999);
+INSERT INTO EMPLOYEE VALUES (056943, 2, 'Operations', 'Blake', 'Springer', 'M',TO_DATE('1994-06-30','YYYY-MM-DD'), 87000, 'LIC', 'springer.blake@gmail.com', 8999076403, 059999);
+INSERT INTO EMPLOYEE VALUES (059999, 2, 'Operations', 'Ajit', 'Poonawala','O',TO_DATE('1975-10-21','YYYY-MM-DD'), 105000, 'LIC', 'poonawal.ajit1@gmail.com', 8999076400, 055564);
+INSERT INTO EMPLOYEE VALUES (016940, 1, 'Sales', 'Ram', 'Charan', 'M',TO_DATE('1986-04-18','YYYY-MM-DD'), 69000, 'Accountant', 'rcharan@outlook.com', 8120076403,012324);
+INSERT INTO EMPLOYEE VALUES (016941, 1, 'Sales', 'Sharvi', 'Jaffery', 'F',TO_DATE('1999-04-17','YYYY-MM-DD'), 67000, 'Accountant', 'sharvijj@gmail.com', 8770076403,012324);
+INSERT INTO EMPLOYEE VALUES (016942, 1, 'Operations', 'Darren', 'Franco', 'M',TO_DATE('1993-08-29','YYYY-MM-DD'), 77000, 'LIC', 'd.franco@outlook.com', 8780076403, 019999);
+INSERT INTO EMPLOYEE VALUES (016943, 1, 'Operations', 'Cherry', 'Chan', 'O',TO_DATE('1997-01-05','YYYY-MM-DD'), 72000, 'LIC', 'chancherry05@gmail.com', 7699076403, 019999);
+INSERT INTO EMPLOYEE VALUES (019999, 1, 'Operations', 'Nick', 'Bilzerian','M',TO_DATE('1971-11-22','YYYY-MM-DD'), 107000, 'LIC', 'bilznick71@gmail.com', 8000076403, 012324);
+
+INSERT INTO Employee values(100101, 1,'Insurance','Ayushi','Patel', 'F',DATE '1980-11-08',25000,'Accountant','ayushipatel@gmail.com',7856912345, 012324);
+INSERT INTO Employee values(101101, 1,'Insurance','Ruchika','Sinha', 'F',DATE '1983-10-08',25000,'Accountant','ruchika19gmail.com',7856912389, 012324);
+INSERT INTO Employee values(102101, 2, 'Credit cards','Akshit','Arora', 'M',DATE '1990-10-08',60000,'clerk','akshit20arora@gmail.com',7856912333,055564);
+INSERT INTO Employee values(199111, 3,'Credit cards','Eddy','Sharma', 'M',DATE '1980-05-08',50000,'Provisionary Officer','eddysharma123@gmail.com',9999988889, 037567);
+INSERT INTO Employee values(104131, 1,'Insurance','Aditya','Tilak', 'M',DATE '1989-10-08',50000,'Banker','adityatilak@gmail.com',7856912322, 012324);
+INSERT INTO Employee values(105534, 3,'Private banking','Megshi','Thakur', 'F',DATE '1980-11-08',50000,'Clerk','megshithakur@gmail.com',7856912344, 037567);
+INSERT INTO Employee values(105745, 2,'Credit cards','Rinita','Srivastva', 'F',DATE '1967-10-08',50000,'Provisionary Officer','rini@yahoo.com',7856913214, 055564);
+INSERT INTO Employee values(107310, 3,'Credit cards','Sneha','Mohan', 'F',DATE '1999-10-08',90000,'Accountant','sneha@yahoo.com',7856913213, 037567);
+INSERT INTO Employee values(109557, 2,'Insurance','Sidhant','Kohli', 'M',DATE '1995-10-04',30000,'LIC','sid@yahoo.com',7856913220, 055564);
+INSERT INTO Employee values(110644, 3,'Private banking','Yash','Navadiya', 'M',DATE '1989-10-08',30000,'Accountant','yash@yahoo.com',7856913221, 037567);
+INSERT INTO Employee values(111101, 1,'Private banking','Virendra','Singh', 'M',DATE '1986-10-08',70000,'Clerk','viv@yahoo.com',7856913229, 012324);
+INSERT INTO Employee values(113104, 2,'Insurance','Radhika','Madan', 'F',DATE '1981-10-08',70000,'LIC','radhika@yahoo.com',7856913005, 055564);
+INSERT INTO Employee values(114107, 1,'Private banking','Boney','Singh', 'M',DATE '1980-10-08',70000,'LIC','bon@yahoo.com',7856913008, 02324);
+INSERT INTO Employee values(115005, 3,'Private banking','Disha','Parmar', 'F',DATE '1968-10-07',70000,'LIC','disha@yahoo.com',7856913007, 037567);
+INSERT INTO Employee values(118202, 2,'Private banking','Barkha','Duta', 'F',DATE '1966-11-08',70000,'Banker','barkhadutt@yahoo.com',7856913777, 055564);
+INSERT INTO Employee values(119324, 1,'Private banking','Mrinal','Sharma', 'F',DATE '1967-10-08',70000,'Banker','mrinal42@yahoo.com',7856914007, 012324);
+INSERT INTO Employee values(120424, 1,'Private banking','Apsara','Sharma', 'F',DATE '1964-10-08',70000,'Banker','mrinal@yahoo.com',7856914003, 012324);
+
