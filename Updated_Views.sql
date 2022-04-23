@@ -146,4 +146,102 @@ INSERT INTO LOAN values(8,61292734,'DMDD0454500',2,TO_DATE('1991-11-10','YYYY-MM
 INSERT INTO LOAN values(9,18467484,'DMDD0454500',2,TO_DATE('2021-12-20','YYYY-MM-DD'));
 INSERT INTO LOAN values(10,13892736,'DMDD0333100',3,TO_DATE('2011-03-22','YYYY-MM-DD'));                                      
                                       
+         
+                                      
+                                      
+                                      
+                                      
+-----------------------------------------------------------------------------------------------------
+             ----------------------- promotion SP -------------------------------------------------------------------
+
+
+CREATE OR REPLACE PROCEDURE PROMOTION(EMP IN NUMBER, POST IN VARCHAR)
+AS
+
+EMP_COUNT NUMBER := 0;
+PREV_SALARY NUMBER := 0;
+SAL NUMBER := 0;
+CUR_POS VARCHAR(20);
+
+
+BEGIN 
+
+SELECT COUNT(*)
+INTO EMP_COUNT 
+FROM EMPLOYEE
+WHERE EMPLOYEE_ID = EMP;
+
+IF EMP_COUNT > 0 THEN
+
+    SELECT SALARY INTO
+    PREV_SALARY
+    FROM EMPLOYEE
+    WHERE EMPLOYEE_ID = EMP;
+    
+    SELECT EMP_ROLE INTO
+    CUR_POS
+    FROM EMPLOYEE
+    WHERE EMPLOYEE_ID = EMP;
+    
+        IF LOWER(POST) = 'accountant' AND LOWER(CUR_POS) NOT IN ('banker','lic','provisionary officer')  THEN
+            
+            SAL := (PREV_SALARY + 5000);
+            
+            UPDATE EMPLOYEE 
+            SET EMP_ROLE = POST,
+            SALARY = SAL
+            WHERE EMPLOYEE_ID=EMP;
+            
+            ELSIF  LOWER(POST) = 'provisionary officer' AND LOWER(CUR_POS) NOT IN ('banker','lic')  THEN
+            
+            SAL := (PREV_SALARY + 15000);
+            
+            UPDATE EMPLOYEE 
+            SET EMP_ROLE = POST,
+            SALARY = SAL
+            WHERE EMPLOYEE_ID=EMP;
+            
+            ELSIF LOWER(POST) = 'banker' AND LOWER(CUR_POS) NOT IN ('banker')  THEN
+            
+            SAL := (PREV_SALARY + 25000);
+            
+            UPDATE EMPLOYEE 
+            SET EMP_ROLE = POST,
+            SALARY = SAL
+            WHERE EMPLOYEE_ID=EMP;
+            
+             ELSIF LOWER(POST) = 'lic' AND LOWER(CUR_POS) NOT IN ('banker', 'provisionary officer')  THEN
+            
+            SAL := (PREV_SALARY + 10000);
+            
+            UPDATE EMPLOYEE 
+            SET EMP_ROLE = POST,
+            SALARY = SAL
+            WHERE EMPLOYEE_ID=EMP;
+             
+        END IF;
+        
+END IF;      
+
+EXCEPTION 
+
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('INVALID ERROR');
+   
+END;
+/
+                                      
+                                      
+----------------------how to run this ---------------------------
+                                      
+                                      
+exec promotion(36940,'provisionary officer');   /// do not copy this in code
+                                      
+                       
+                                      
+                                      
+                                      
+                                      
+                                      
+                                      
                                       
