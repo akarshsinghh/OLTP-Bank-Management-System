@@ -506,6 +506,15 @@ EXCEPTION
     DBMS_OUTPUT.PUT_LINE('INVALID');
 
 END;
+                                      
+                                      
+                                      
+                                      ----- RUN PROCEDURE
+--EXEC CUSTOMER_LOGIN('ENTER ALL EMPLOYEE DEATILS HERE');
+EXEC EMPLOYEE_LOGIN(111111,2,'SALES','RUCH','SINH','F','03-JAN-2020',30000,'BANKER','ABC@XYZ',1234567890,37567);
+EXEC CUSTOMER_LOGIN(100021,'RUCHIKA','SINHA','03-JAN-2020','NE','F','12','ABC','BOSTON','MA',82115,1234567890);
+EXEC DEACTIVE(100003);
+
 
 
                                       
