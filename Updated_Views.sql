@@ -463,7 +463,51 @@ DBMS_OUTPUT.PUT_LINE('INVALID');
 
 END;
 /
-                                      
+       
+ CREATE OR REPLACE PROCEDURE DEACTIVE(CUST IN NUMBER) 
+AS
+
+COUNT_C NUMBER := 0;
+ACC_NO NUMBER := 0;
+STATUS VARCHAR(10) := 'INACTIVE';
+NOTEXIST EXCEPTION;
+
+BEGIN
+
+SELECT COUNT(*)
+INTO COUNT_C 
+FROM CUSTOMER
+WHERE CUSTOMER_ID = CUST;
+
+IF COUNT_C > 0 THEN
+
+    SELECT AccountNumber
+    INTO ACC_NO
+    FROM ACCOUNT
+    WHERE CUSTOMER_ID = CUST;
+    
+    UPDATE ACCOUNT_STATUS
+    SET STATUS = 'INACTIVE'
+    WHERE Account_Number = ACC_NO;
+    
+    DBMS_OUTPUT.PUT_LINE('STATUS OF ' || CUST || ' ID' || ' CHANGED TO INACTIVE');
+    
+
+ELSE 
+        RAISE NOTEXIST;
+END IF;
+
+EXCEPTION
+
+    WHEN NOTEXIST THEN
+    DBMS_OUTPUT.PUT_LINE('NO SUCH CUSTOMER');
+    
+    WHEN OTHERS THEN 
+    DBMS_OUTPUT.PUT_LINE('INVALID');
+
+END;
+
+
                                       
         
                                       
