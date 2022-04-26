@@ -516,7 +516,20 @@ EXEC CUSTOMER_LOGIN(100021,'RUCHIKA','SINHA','03-JAN-2020','NE','F','12','ABC','
 EXEC DEACTIVE(100003);
 
 
+--INDEX 
 
+CREATE INDEX ACCOUNT_ID_INDEX 
+ON ACCOUNT_STATUS(Account_Number);
+
+//this is what we should do in order to explain the storage                                       
+EXPLAIN PLAN FOR
+SELECT * FROM ACCOUNT_STATUS
+WHERE Account_Number = 3719713158835300;
+
+SELECT 
+    PLAN_TABLE_OUTPUT 
+FROM 
+    TABLE(DBMS_XPLAN.DISPLAY());
                                       
         
                                       
