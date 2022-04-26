@@ -1,25 +1,34 @@
-CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH DATE,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER, AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
+CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH DATE,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER,AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
 AS
 
 ID_NOT_ENTERED EXCEPTION;
+ID_LENGTH EXCEPTION;
 FirstNameMissing EXCEPTION;
+FirstNameLength EXCEPTION;
 LastNameMissing EXCEPTION;
+LastNameLength EXCEPTION;
 MissingDOB EXCEPTION;
 IncorrectDOB EXCEPTION;
 WorksAtMissing EXCEPTION;
+WorksAtLength EXCEPTION;
 GenderMissing EXCEPTION;
 GenderIncorrect EXCEPTION;
+GenderLength EXCEPTION;
 ApartmentNumberMissing EXCEPTION;
+ApartmentNumberLength EXCEPTION;
 StreetMissing EXCEPTION ;
+StreetLength EXCEPTION;
 CityMissing EXCEPTION;
+CityLength EXCEPTION;
 StateMissing EXCEPTION;
+StateLength EXCEPTION;
 ZipMissing EXCEPTION;
 ZipIncorrect EXCEPTION;
 ContactMissing EXCEPTION;
 ContactIncorrect EXCEPTION;
 
 AccountNumberMissing EXCEPTION;
-AccountNumberIncorrect EXCEPTION;
+AccountNumberLength EXCEPTION;
 AccountTypeMissing EXCEPTION;
 AccountTypeIncorrect EXCEPTION;
 IFSCMissing EXCEPTION;
@@ -28,30 +37,49 @@ BalanceMissing EXCEPTION;
 BalanceNegative EXCEPTION;
 
 BEGIN 
+
 IF CustomerID IS NULL THEN
     RAISE ID_NOT_ENTERED ;
+ELSIF LENGTH(CustomerID)<>6 THEN
+    RAISE ID_Length;
 ELSIF FirstName IS NULL THEN
     RAISE FirstNameMissing;
+ELSIF LENGTH(FirstName)>20 THEN
+    RAISE FirstNameLength;
 ELSIF LastName IS NULL THEN
     RAISE LastNameMissing;
+ELSIF LENGTH(LastName)>20 THEN
+    RAISE LastNameLength;
 ELSIF DATEOFBIRTH IS NULL THEN
     RAISE MissingDOB;
 
 ELSIF Worksat IS NULL THEN
     RAISE WorksAtMissing;
+ELSIF LENGTH(Worksat)>20 THEN
+    RAISE WorksatLength;
 ELSIF Gender IS NULL THEN
     RAISE GenderMissing;
 ELSIF Gender NOT IN ('M','F','O') THEN
     RAISE GenderIncorrect;
+ELSIF LENGTH(Gender)>1 THEN
+    RAISE GenderLength;
 ELSIF AptNo IS NULL THEN
     RAISE ApartmentNumberMissing;
+ELSIF LENGTH(AptNo)>20 THEN
+    RAISE ApartmentNumberLength;
 ELSIF ADDRESSLINE1 IS NULL THEN
     RAISE StreetMissing;
+ELSIF LENGTH(ADDRESSLINE1)>20 THEN
+    RAISE StreetLength;
 ELSIF ADDRESSLINE2 IS NULL THEN
     RAISE CityMissing;
+ELSIF LENGTH(ADDRESSLINE2)>20 THEN
+    RAISE CityLength;
 ELSIF ADDRESSLINE3 IS NULL THEN
     RAISE StateMissing;
-ELSIF AptNo IS NULL THEN
+ELSIF LENGTH(ADDRESSLINE2)>2 THEN
+    RAISE StateLength;
+ELSIF Zip IS NULL THEN
     RAISE ZipMissing;
 ELSIF LENGTH(Zip)<>5 THEN
     RAISE ZipIncorrect;
@@ -59,19 +87,15 @@ ELSIF Contact IS NULL THEN
     RAISE ContactMissing;
 ELSIF LENGTH(Contact)<>10 THEN
     RAISE ContactIncorrect;
-    
-ELSIF AccNo IS NULL THEN
-    RAISE AccountNumberMissing;
-ELSIF Length(AccNo) <> 16 THEN
-    RAISE AccountNumberIncorrect;
+
+ELSIF LENGTH(AccNo)<>16 THEN
+    RAISE AccountNumberLength;
 ELSIF AccType IS NULL THEN
     RAISE AccountTypeMissing;
 ELSIF AccType NOT IN ('checking','savings') THEN
     RAISE AccountTypeIncorrect;
 ELSIF Branch IS NULL THEN
     RAISE IFSCMissing;
-ELSIF Length(Branch) <> 11 THEN
-    RAISE IFSCIncorrect;
 ELSIF Length(Branch) <> 11 THEN
     RAISE IFSCIncorrect;
 ELSIF OpeningBalance IS NULL THEN
@@ -81,9 +105,9 @@ ELSIF OpeningBalance<0 OR OpeningBalance=0 THEN
 
 END IF;
 
+---INSERTS
 
 INSERT INTO CUSTOMER VALUES(
-CustomerID,
 FirstName,
 LastName,
 DATEOFBIRTH,
@@ -97,8 +121,9 @@ Zip,
 Contact);
 
 INSERT INTO Account VALUES (AccNo, AccType, Branch, CustomerID, OpeningBalance);
+INSERT INTO ACCOUNT_STATUS(account_number,status,created_date) VALUES(AccNo, 'Active', sys.date);
 
-
+----EXCEPTIONS
 EXCEPTION
 
     WHEN ID_NOT_ENTERED THEN 
@@ -164,13 +189,26 @@ EXCEPTION
     WHEN BalanceNegative THEN
      DBMS_OUTPUT.PUT_LINE('The opening balance must be positive');
      
+     WHEN FirstNameLength THEN
+     DBMS_OUTPUT.PUT_LINE('The first name should be less than 20 characters.');
+     
+     WHEN LastNameLength THEN
+     DBMS_OUTPUT.PUT_LINE('The last name should be less than 20 characters.');
+     
+     WHEN GenderLength THEN
+     DBMS_OUTPUT.PUT_LINE('The gender length must be one character from M, F, O');
+     
+     WHEN ApartmentNumberLength THEN
+     DBMS_OUTPUT.PUT_LINE('The Apartment Number cannot be less than 20 characters');
+     WHEN StreetLength THEN
+     DBMS_OUTPUT.PUT_LINE('The street length cannot be more than 20 characters');
+     WHEN CityLength THEN
+     DBMS_OUTPUT.PUT_LINE('The city length cannot be more than 20 characters');
+     WHEN StateLength THEN
+     DBMS_OUTPUT.PUT_LINE('The state length must be 2 characters.');
+     WHEN AccountNumberLength THEN
+     DBMS_OUTPUT.PUT_LINE('The Account Number must be 16 characters.');
+     WHEN ID_Length THEN
+     DBMS_OUTPUT.PUT_LINE('The ID must be 6 characters.');
 
 END;
-
-
-
-
-
-
-
-
