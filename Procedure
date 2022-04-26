@@ -1,0 +1,55 @@
+-- Account statement and transaction
+
+create or replace PROCEDURE account_statement(acc_no IN NUMBER,
+    mycursor OUT SYS_REFCURSOR )
+AS
+BEGIN
+  OPEN mycursor FOR select transaction_date,  debit_account as From_account, credit_account as To_account, amount, 
+                    sum(case when debit_account = acc_no then -1*amount else amount end) over(order by transaction_date) balance
+                    from (
+                        select  transaction_date,  to_char(debit_account) debit_account, to_char(credit_account) credit_account, amount
+                        from transactions
+                        where debit_account = acc_no
+                        and status = 'Success'
+                        
+                        union all
+                        
+                        select transaction_date,  to_char(debit_account) debit_account, to_char(credit_account) credit_account, amount
+                        from transactions
+                        where credit_account = acc_no
+                        and status = 'Success'
+                    ) a
+                    order by transaction_date
+                    ;
+END account_statement;
+
+
+
+declare mycursor SYS_REFCURSOR;
+begin
+    account_statement(37530666568966100, mycursor);
+    DBMS_SQL.RETURN_RESULT(mycursor);
+end;
+
+--Loan request application procedure
+
+create or replace procedure loan_request(cust_id in number, ifsc in varchar, principal in number, loan_type in number)
+as
+is_valid int;
+begin
+    select max(1) into is_valid
+    from account
+    where customer_id = cust_id
+    and branchifsc = ifsc
+    ;
+    
+    if is_valid is not null then
+        execute immediate 'INSERT INTO loan(customer_id, loanifsc, principal, loan_type, status) values( ' || cust_id || ', ''' || ifsc || ''', ' || principal || ', ' || loan_type || ', ''Requested'')';
+    else
+        dbms_output.put_line('Provided Customer or BrachIFSC are incorrect');
+    end if;
+end;
+
+execute loan_request(100001, 'DMDD0454500', 10000, 3);
+
+select * from loan;
