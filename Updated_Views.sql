@@ -544,3 +544,9 @@ from employee
 group by Department;
 
                                       
+-- total employees by branch
+Select 
+Count(Employee_ID) , 
+Branch_ID
+from employee 
+group by Branch_ID;
