@@ -1,6 +1,7 @@
-CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH DATE,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER,AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
+CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH VARCHAR,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER,AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
 AS
 
+---EXCEPTIONS
 ID_NOT_ENTERED EXCEPTION;
 ID_LENGTH EXCEPTION;
 FirstNameMissing EXCEPTION;
@@ -27,6 +28,7 @@ ZipIncorrect EXCEPTION;
 ContactMissing EXCEPTION;
 ContactIncorrect EXCEPTION;
 
+AccountNumberIncorrect EXCEPTION;
 AccountNumberMissing EXCEPTION;
 AccountNumberLength EXCEPTION;
 AccountTypeMissing EXCEPTION;
@@ -36,8 +38,8 @@ IFSCIncorrect EXCEPTION;
 BalanceMissing EXCEPTION;
 BalanceNegative EXCEPTION;
 
-BEGIN 
 
+BEGIN 
 IF CustomerID IS NULL THEN
     RAISE ID_NOT_ENTERED ;
 ELSIF LENGTH(CustomerID)<>6 THEN
@@ -77,7 +79,7 @@ ELSIF LENGTH(ADDRESSLINE2)>20 THEN
     RAISE CityLength;
 ELSIF ADDRESSLINE3 IS NULL THEN
     RAISE StateMissing;
-ELSIF LENGTH(ADDRESSLINE2)>2 THEN
+ELSIF LENGTH(ADDRESSLINE3)>2 THEN
     RAISE StateLength;
 ELSIF Zip IS NULL THEN
     RAISE ZipMissing;
@@ -88,6 +90,8 @@ ELSIF Contact IS NULL THEN
 ELSIF LENGTH(Contact)<>10 THEN
     RAISE ContactIncorrect;
 
+ELSIF AccNo IS NULL THEN
+    RAISE AccountNumberMissing;
 ELSIF LENGTH(AccNo)<>16 THEN
     RAISE AccountNumberLength;
 ELSIF AccType IS NULL THEN
@@ -102,28 +106,33 @@ ELSIF OpeningBalance IS NULL THEN
     RAISE BalanceMissing;
 ELSIF OpeningBalance<0 OR OpeningBalance=0 THEN
     RAISE BalanceNegative;
-
+    
 END IF;
 
 ---INSERTS
-
 INSERT INTO CUSTOMER VALUES(
-FirstName,
-LastName,
-DATEOFBIRTH,
-Worksat,
-Gender,
-AptNo,
-ADDRESSLINE1,
-ADDRESSLINE2,
-ADDRESSLINE3,
-Zip,
-Contact);
+    CustomerID,
+    FirstName,
+    LastName,
+    TO_DATE(DATEOFBIRTH, 'YYYY-MM-DD'),
+    Worksat,
+    Gender,
+    AptNo,
+    ADDRESSLINE1,
+    ADDRESSLINE2,
+    ADDRESSLINE3,
+    Zip,
+    Contact);
+    
+INSERT INTO Account VALUES (AccNo,
+    AccType,
+    Branch,
+    CustomerID,
+    OpeningBalance); 
+    
+INSERT INTO ACCOUNT_STATUS(account_number,status,created_date) VALUES(AccNo, 'Active', SYSDATE);
 
-INSERT INTO Account VALUES (AccNo, AccType, Branch, CustomerID, OpeningBalance);
-INSERT INTO ACCOUNT_STATUS(account_number,status,created_date) VALUES(AccNo, 'Active', sys.date);
-
-----EXCEPTIONS
+---EXCEPTION HANDLING
 EXCEPTION
 
     WHEN ID_NOT_ENTERED THEN 
@@ -148,7 +157,7 @@ EXCEPTION
      DBMS_OUTPUT.PUT_LINE('Gender cannot be empty'); 
      
     WHEN GenderIncorrect THEN
-     DBMS_OUTPUT.PUT_LINE('The gender must be selected from M, F & O');  
+     DBMS_OUTPUT.PUT_LINE('The gender must be selected from M, F , O');  
      
     WHEN ApartmentNumberMissing THEN
      DBMS_OUTPUT.PUT_LINE('The apartment number cannot be empty');
@@ -210,5 +219,12 @@ EXCEPTION
      DBMS_OUTPUT.PUT_LINE('The Account Number must be 16 characters.');
      WHEN ID_Length THEN
      DBMS_OUTPUT.PUT_LINE('The ID must be 6 characters.');
-
 END;
+
+----testing---
+
+EXEC CustomerOnboarding_AccountCreation(100103, 'Jasap', 'Flocky', '1998-05-19', 'NE', 'M', '14', 'Calumet St', 'Boston', 'MA', '12345', '9999996611',3719713158666666, 'savings', 'DMDD0333100', 10000);
+
+SELECT * FROM CUSTOMER;
+SELECT * FROM ACCOUNT;
+SELECT * FROM ACCOUNT_STATUS;
