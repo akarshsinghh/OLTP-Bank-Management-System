@@ -1,6 +1,3 @@
---select * from transactions;
---select * from account;
---select * from transactions;
 set serveroutput on;
 --exec moneytransfer(89135767380499400,'DMDD0101022',12494980148173100,'DMDD0333100',1);
 create or replace procedure moneytransfer (
@@ -31,7 +28,7 @@ select branchifsc into v_difsc from account where accountnumber = i_debit_acc;
 select branchifsc into v_cifsc from account where accountnumber = i_credit_acc;
 select account_balance into v_amount from account where accountnumber = i_debit_acc;
 select sysdate into tdate from dual;
-if length(i_debit_acc) = 17 and length(i_credit_acc) = 17 then
+if length(i_debit_acc) > 10 and length(i_credit_acc) > 10 then
 dbms_output.put_line('Length Validated');
 else
 raise e_length;
@@ -97,7 +94,7 @@ end if;
 
 exception
 when e_length then
-dbms_output.put_line('account number is not 13 digits');
+dbms_output.put_line('account number does not have enough digits');
 when insufficient_balance then
 dbms_output.put_line('You have insufficient balance to transfer money $');
 when e_ifsc then
@@ -108,4 +105,5 @@ when no_data_found then null;
 end moneytransfer;
 /
 
-
+exec moneytransfer(89135767380499400,'DMDD0101022',12494980148173100,'DMDD0333100',1);
+exec moneytransfer(3719713158839988,'DMDD0101022',13719713158835300,'DMDD0101022',48);
