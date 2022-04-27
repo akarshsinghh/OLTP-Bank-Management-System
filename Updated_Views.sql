@@ -550,3 +550,11 @@ Count(Employee_ID) ,
 Branch_ID
 from employee 
 group by Branch_ID;
+                                      
+                                      
+                                      --max & min salary by department
+Select 
+Max(Salary), Min(Salary) , 
+Department
+from employee 
+group by Department;
