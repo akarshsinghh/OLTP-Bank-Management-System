@@ -532,5 +532,15 @@ FROM
     TABLE(DBMS_XPLAN.DISPLAY());
                                       
         
+   
                                       
+                                      
+                                      
+                                      -- total employees by department
+Select 
+Count(Employee_ID) , 
+Department
+from employee 
+group by Department;
+
                                       
