@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID INT, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH VARCHAR,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip INT, Contact INT, AccNo NUMBER,AccType VARCHAR, Branch CHAR, OpeningBalance DECIMAL)
+CREATE OR REPLACE PROCEDURE CustomerOnboarding_AccountCreation(CustomerID VARCHAR, FirstName VARCHAR,LastName VARCHAR, DATEOFBIRTH VARCHAR,Worksat VARCHAR,Gender VARCHAR,AptNo VARCHAR, ADDRESSLINE1 VARCHAR, ADDRESSLINE2 VARCHAR, ADDRESSLINE3 VARCHAR, Zip VARCHAR, Contact VARCHAR, AccNo VARCHAR,AccType VARCHAR, Branch CHAR, OpeningBalance VARCHAR)
 AS
 
 ---EXCEPTIONS
@@ -27,6 +27,7 @@ ZipMissing EXCEPTION;
 ZipIncorrect EXCEPTION;
 ContactMissing EXCEPTION;
 ContactIncorrect EXCEPTION;
+NUM_VALUE_ERROR EXCEPTION;
 
 AccountNumberIncorrect EXCEPTION;
 AccountNumberMissing EXCEPTION;
@@ -42,6 +43,8 @@ BalanceNegative EXCEPTION;
 BEGIN 
 IF CustomerID IS NULL THEN
     RAISE ID_NOT_ENTERED ;
+ELSIF is_number(CustomerID) = 0 OR is_number(Zip)=0 OR is_number(Contact)=0 OR is_number(AccNo)=0 OR is_number(OpeningBalance)=0 THEN
+    raise NUM_VALUE_ERROR;
 ELSIF LENGTH(CustomerID)<>6 THEN
     RAISE ID_Length;
 ELSIF FirstName IS NULL THEN
@@ -219,6 +222,8 @@ EXCEPTION
      DBMS_OUTPUT.PUT_LINE('The Account Number must be 16 characters.');
      WHEN ID_Length THEN
      DBMS_OUTPUT.PUT_LINE('The ID must be 6 characters.');
+     WHEN NUM_VALUE_ERROR THEN 
+     DBMS_OUTPUT.PUT_LINE('The Value must be a number.');
 END;
 
 ----testing---
