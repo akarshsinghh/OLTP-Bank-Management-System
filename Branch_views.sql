@@ -119,3 +119,20 @@ INNER JOIN EMPLOYEE
 ON EMPLOYEE.Branch_ID=Branch.Branch_ID;
 
 
+-------------view for branch and account info--------------
+
+Create or replace view Branch_info 
+AS
+SELECT
+count(Distinct account.AccountNumber) AS Number_of_account,
+Round(Sum(account.account_balance),2) as Total_account,
+Round(AVG(account.account_balance),2) as average_balance,
+branch_id
+FROM 
+Branch
+inner join Account 
+on branch.branchIFSC=account.branchIFSC
+group by branch_id;
+select * from Branch_info;
+
+
