@@ -1,0 +1,31 @@
+create or replace PROCEDURE account_statement(acc_no IN NUMBER,
+    mycursor OUT SYS_REFCURSOR )
+AS
+BEGIN
+  OPEN mycursor FOR select transaction_date,  debit_account as From_account, credit_account as To_account, amount, 
+                    sum(case when  credit_account=debit_account then amount
+                    when debit_account = acc_no then -1*amount else amount end) over(order by transaction_date) balance
+                    from (
+                        select  transaction_date,  to_char(debit_account) debit_account, to_char(credit_account) credit_account, amount
+                        from transactions
+                        where credit_account = acc_no
+
+                        
+                        union
+                        
+                        select transaction_date,  to_char(debit_account) debit_account, to_char(credit_account) credit_account, amount
+                        from transactions
+                        where debit_account = acc_no
+                    ) a
+                    order by transaction_date
+                    ;
+END account_statement;
+
+
+
+declare mycursor SYS_REFCURSOR;
+begin
+    account_statement(37530666568966100, mycursor);
+    DBMS_SQL.RETURN_RESULT(mycursor);
+end;
+
