@@ -1,0 +1,44 @@
+-----VIEW to check most active branches with most customers
+
+CREATE or REPLACE VIEW Zip_Cust_Loan AS
+    select Br.Zipcode as Zipcode, count(Cus.Count_C) as Customer_count, count(br.AccNum) as Loan_Acc_Count
+    from
+    (
+        select b.Zipcode as Zipcode,count(bl.AccNum) as AccNum
+        from 
+                Branch b inner join
+                ( 
+                    select lt.BranchIFSC as BranchIFSC, count(l.LoanAccNumber) as AccNum
+                    from LOAN_TRANSACTIONS lt 
+                    inner join Loan l
+                    on lt.LoanAccNumber = l.LoanAccNumber
+                    group by lt.BranchIFSC) bl
+                    
+        on b.BranchIFSC = bl.BranchIFSC
+        group by b.Zipcode) Br 
+        
+        inner join
+    (
+        select C.Zipcode as Zipcode, count(C.Customer_ID) as Count_C
+        from Customer C
+        group by C.Zipcode ) Cus
+        
+    on Br.Zipcode = Cus.Zipcode
+    group by Br.Zipcode;
+    
+ ----VIEW for max and min salary by department
+ CREATE or REPLACE VIEW Max_Min_Dept AS
+ Select 
+Max(Salary), Min(Salary) , 
+Department
+from employee 
+group by Department;
+
+---VIEW for customer & employee ralationships
+CREATE VIEW CUSTOMER_EMPLOYEE AS
+SELECT CUSTOMER.Customer_ID,CONCAT(CUSTOMER.FIRST_NAME, CUSTOMER.LAST_NAME) AS CUSTOMER,WORKS_WITH.RELATIONSHIP, EMPLOYEE.Employee_ID, CONCAT(EMPLOYEE.FIRST_NAME, EMPLOYEE.LAST_NAME) AS EMPLOYEE 
+FROM CUSTOMER
+INNER JOIN WORKS_WITH 
+ON CUSTOMER.CUSTOMER_ID=WORKS_WITH.CUSTOMER_ID
+INNER JOIN EMPLOYEE
+ON EMPLOYEE.EMPLOYEE_ID= works_with.employee_id;
